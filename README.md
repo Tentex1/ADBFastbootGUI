@@ -60,6 +60,5 @@ MIT License
 ---
 
 ## 💬 Contributing
-
-Feel free to open issues or pull requests for feedback, improvements, or bug reports.  
-If you find it useful, consider leaving a ⭐ to support the project!
+Feel free to open an issue or request for feedback, improvements, or bug reports. 
+If you find it helpful, you can leave a ⭐ or [Donate](https://buymeacoffe.com/duranforreal) to support the project.
