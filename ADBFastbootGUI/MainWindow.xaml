@@ -1,0 +1,150 @@
+﻿<Window x:Class="ADBFastbootGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ADBFastbootGUI"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown"
+        Title="ADB and Fastboot GUI" Height="536" Width="982.688" ResizeMode="CanMinimize">
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="ExitButton">
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E81123"/>
+                                <!-- Kırmızı -->
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#C50F1F"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="MinButton">
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#CCE6FF"/>
+                                <!-- Mavi hover -->
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#99CCFF"/>
+                                <!-- Daha koyu mavi -->
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" ResizeBorderThickness="0" CaptionHeight="0" CornerRadius="20"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Button x:Name="AboutMenuItem" Content="ADB and Fastboot GUI" Click="Header_Click" Width="180" Margin="0,0,803,0" Background="Transparent" BorderThickness="0" Panel.ZIndex="2"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="TopPanel_MouseDown" RenderTransformOrigin="0.5,0.5" Width="805" Background="Transparent">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Button x:Name="CloseButton" Style="{StaticResource ExitButton}" Content="X" Click="CloseButton_Click"/>
+                <Button x:Name="MinButton" Width="55" Height="30" Style="{StaticResource MinButton}" Content="–" Click="MinButton_Click"/>
+            </StackPanel>
+
+            <Rectangle Height="1" Fill="Black" VerticalAlignment="Bottom"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock x:Name="ADBTitle" Text="ADB" FontSize="50" HorizontalAlignment="Left" Margin="30,10,0,110" FontWeight="Bold"/>
+            <TextBlock x:Name="FastbootTitle" FontSize="50" HorizontalAlignment="Right" Margin="0,10,13,110" FontWeight="Bold"><Run Text="Fastboot"/></TextBlock>
+            <StackPanel x:Name="ADBStackPanel" Orientation="Vertical" HorizontalAlignment="Left"
+                    Margin="14,70,0,150">
+                <Button x:Name="ShellButton" Content="Shell" Height="50" Width="135" FontSize="25" Margin="0,0,0,0" BorderThickness="0" Click="ShellButton_Click"/>
+                <Button x:Name="RebootButton" Content="Reboot" Height="50" Width="135" FontSize="25" Margin="0,10,0,10" BorderThickness="0" Click="RebootButton_Click"/>
+                <Button x:Name="AppsButton" Content="Apps" Height="50" Width="135" FontSize="25" Margin="0,0,0,10" BorderThickness="0" Click="ProgramsButton_Click"/>
+                <Button x:Name="FilesButton" Content="Files" Height="50" Width="135" FontSize="25" Margin="0,0,0,10" BorderThickness="0" Click="FilesButton_Click"/>
+            </StackPanel>
+            <StackPanel x:Name="FastbootStackPanel" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Margin="0,70,34,0">
+                <Button x:Name="FlashButton" Content="Flash" Height="50" Width="135" FontSize="25" Margin="0,0,0,10" BorderThickness="0" Click="FlashButton_Click"/>
+                <Button x:Name="FastbootRebootButton" Content="Reboot" Height="50" Width="135" FontSize="25" Margin="0,0,0,0" BorderThickness="0" Click="FastbootRebootButton_Click"/>
+                <Button x:Name="FastbootSidelodButton" Content="Sideload" Height="50" Width="135" FontSize="25" Margin="10" BorderThickness="0" Click="FastbootSidelodButton_Click"/>
+            </StackPanel>
+            <TextBlock x:Name="ADBDevicesTextBlock" Text="ADB Devices" FontSize="20" Margin="318,24,380,437"/>
+            <TextBlock x:Name="FastbootDevicesTextBlock" Text="Fastboot Devices" FontSize="20" Margin="300,242,350,219"/>
+            <TextBox x:Name="ADBDevicesTextBox" IsReadOnly="True" Height="200" Margin="166,42,433,263" MaxLines="4" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="FastbootDevicesTextBox" IsReadOnly="True" Height="200" Margin="166,262,433,43" MaxLines="4" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Button x:Name="KillServerButton" Content="Kill Server" Height="45" Width="150" FontSize="22" Margin="10,0,0,10" BorderThickness="0" Click="KillServerButton_Click"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+            <Button x:Name="StartServerButton" Content="Start Server" Height="45" Width="150" FontSize="22" Margin="10,0,0,64" BorderThickness="0" Click="StartServerButton_Click"
+                VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="ADBDevices2TextBlock" Text="ADB Devices" FontSize="20" Margin="774,311,-76,150"/>
+            <TextBlock x:Name="FastbootDevices2TextBlock" Text="Fastboot Devices" FontSize="20" Margin="570,311,80,150"/>
+            <Rectangle Fill="Black" Width="1" Margin="742,311,240,21"/>
+            <RadioButton x:Name="ADBThirdDevice"  HorizontalAlignment="Left" Margin="750,445,0,21" FontSize="20" Width="208" Content="XXXX"/>
+            <RadioButton x:Name="ADBSecondDevice" HorizontalAlignment="Left" Margin="750,397,0,63" FontSize="20" Width="208" Content="XXXX"/>
+            <RadioButton x:Name="ADBFirstDevice" HorizontalAlignment="Left" Margin="750,350,0,110" FontSize="20" Width="208" Content="XXXX"/>
+            <RadioButton x:Name="FastbootThirdDevice"  HorizontalAlignment="Left" Margin="550,445,0,21" FontSize="20" Width="208" Content="XXXX"/>
+            <RadioButton x:Name="FastbootSecondDevice" HorizontalAlignment="Left" Margin="550,397,0,63" FontSize="20" Width="208" Content="XXXX"/>
+            <RadioButton x:Name="FastbootFirstDevice" HorizontalAlignment="Left" Margin="550,350,0,110" FontSize="20" Width="208" Content="XXXX"/>
+        </Grid>
+    </Grid>
+</Window>
