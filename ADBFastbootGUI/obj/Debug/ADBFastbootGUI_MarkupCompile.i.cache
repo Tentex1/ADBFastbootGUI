@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Yavuz\Desktop\ADBFastbootGUI\ADBFastbootGUI\obj\Debug\
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\
 ADBFastbootGUI
 none
 false
 DEBUG;TRACE
-C:\Users\Yavuz\Desktop\ADBFastbootGUI\ADBFastbootGUI\App.xaml
-8-885590012
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\App.xaml
+10925041453
 
-13-1823107434
-181733445739
-MainWindow.xaml;Windows\AboutBox.xaml;Windows\FilesOptions.xaml;Windows\ProgramsListWindow.xaml;Windows\ProgramsOptions.xaml;Windows\ProgramUninstallDialog.xaml;Windows\ProgressBar.xaml;Windows\RebootOptions.xaml;
+16-2094047388
+19-1307601636
+MainWindow.xaml;Windows\AboutBox.xaml;Windows\DialogBox.xaml;Windows\Files\PullFileWindow.xaml;Windows\Files\SendFileWindow.xaml;Windows\ProgramsListWindow.xaml;Windows\ProgramUninstallDialog.xaml;Windows\ProgressBar.xaml;Windows\SettingsWindow.xaml;Windows\WirelessConnectionWindow.xaml;
 
 True
 

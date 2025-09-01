@@ -61,3 +61,165 @@ C:\Users\Yavuz\Desktop\ADBFastbootGUI\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.cs
 C:\Users\Yavuz\Desktop\ADBFastbootGUI\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CopyComplete
 C:\Users\Yavuz\Desktop\ADBFastbootGUI\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.exe
 C:\Users\Yavuz\Desktop\ADBFastbootGUI\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.pdb
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe.config
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.pdb
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.dll
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.AssemblyReference.cache
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\FilesOptions.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsOptions.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\RebootOptions.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.g.cs
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.cache
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.lref
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\FilesOptions.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsOptions.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\RebootOptions.baml
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.g.resources
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.Properties.Resources.resources
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.GenerateResource.cache
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CoreCompileInputs.cache
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CopyComplete
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.exe
+C:\Users\Yavuz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.pdb
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe.config
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.pdb
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.dll
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.pdb
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.AssemblyReference.cache
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\FilesOptions.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsOptions.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\RebootOptions.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.g.cs
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.cache
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.lref
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\FilesOptions.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsOptions.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\RebootOptions.baml
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.g.resources
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.Properties.Resources.resources
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.GenerateResource.cache
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CoreCompileInputs.cache
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CopyComplete
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.exe
+C:\Users\drn\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe.config
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.dll
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\RebootOptions.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.lref
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\RebootOptions.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.g.resources
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.Properties.Resources.resources
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.GenerateResource.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CoreCompileInputs.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.exe
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.AssemblyReference.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\PullFileWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\SendFileWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\PullFileWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\SendFileWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\DialogBox.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\DialogBox.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastb.34B36E72.Up2Date
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe.config
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.exe
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\ADBFastbootGUI.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.dll
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignColors.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.AssemblyReference.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\DialogBox.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\PullFileWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\SendFileWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI_MarkupCompile.lref
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\App.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\MainWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\AboutBox.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\DialogBox.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\PullFileWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\Files\SendFileWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramsListWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgramUninstallDialog.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\ProgressBar.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.g.resources
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.Properties.Resources.resources
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.GenerateResource.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CoreCompileInputs.cache
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.exe
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.pdb
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\WirelessConnectionWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\WirelessConnectionWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\SettingsWindow.g.cs
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\Windows\SettingsWindow.baml
+C:\Users\yvz\Desktop\ADBFastbootGUI-V2 - Copy\ADBFastbootGUI-V2\ADBFastbootGUI\obj\Debug\ADBFastbootGUI.csproj.CopyComplete
