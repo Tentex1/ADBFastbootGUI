@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ADBFastbootGUI.Themes;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,10 +25,16 @@ namespace ADBFastbootGUI.Windows
     public partial class ProgramsListWindow : Window
     {
         MainWindow mw = new MainWindow();
-        string adbpath = $@"C:\Program Files\ADBFastbootGUI\";
+        string adbpath = $@".\";
         public ProgramsListWindow()
         {
             InitializeComponent();
+
+            ThemeManagerHelper.ThemeChanged += OnThemeChanged;
+
+            this.Unloaded += (s, e) => ThemeManagerHelper.ThemeChanged -= OnThemeChanged;
+
+            ChangeTheme(ThemeManagerHelper.IsDarkTheme);
 
             string selectedDevice = null;
 
@@ -39,7 +46,7 @@ namespace ADBFastbootGUI.Windows
                 selectedDevice = mw.ADBThirdDevice.Content.ToString();
 
             if (selectedDevice == null)
-                MessageBox.Show("CONNECT OR SELECT A DEVICE!");
+                DialogBox.Show("CONNECT OR SELECT A DEVICE!");
             else
             {
                 string Control = System.IO.Path.Combine(adbpath, "adb.exe");
@@ -68,7 +75,7 @@ namespace ADBFastbootGUI.Windows
                         {
                             Dispatcher.Invoke(() =>
                             {
-                                PackagesBox.AppendText($"\n\n{e.Data}" + "\n");
+                                PackagesBox.AppendText($"\n{e.Data}" + "\n");
                                 PackagesBox.ScrollToEnd();
                             });
                         }
@@ -91,7 +98,35 @@ namespace ADBFastbootGUI.Windows
                     process.BeginErrorReadLine();
                 }
                 else
-                    MessageBox.Show("adb.exe Not found in path : " + adbpath);
+                    DialogBox.Show("adb.exe Not found in path : " + adbpath);
+            }
+        }
+        private void OnThemeChanged(bool isDark)
+        {
+            // Gelen bilgiye göre renkleri değiştiren metodu çağır.
+            ChangeTheme(isDark);
+        }
+        public void ChangeTheme(bool isDark)
+        {
+            System.Windows.Media.Brush foregroundBrush; // Tek bir değişkenle kodu kısaltalım.
+
+            if (isDark)
+            {
+                // Koyu Tema
+                foregroundBrush = System.Windows.Media.Brushes.White;
+                this.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(45, 45, 48));
+                Title.Foreground = foregroundBrush;
+                PackagesBox.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(45, 45, 48));
+                PackagesBox.Foreground = foregroundBrush;
+            }
+            else
+            {
+                // Açık Tema
+                foregroundBrush = System.Windows.Media.Brushes.Black;
+                this.Background = System.Windows.Media.Brushes.WhiteSmoke; // Örnek arkaplan
+                Title.Foreground = foregroundBrush;
+                PackagesBox.Background = System.Windows.Media.Brushes.WhiteSmoke;
+                PackagesBox.Foreground = foregroundBrush;
             }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -144,15 +179,28 @@ namespace ADBFastbootGUI.Windows
             Storyboard.SetTarget(topAnim, this);
             Storyboard.SetTargetProperty(topAnim, new PropertyPath("Top"));
 
-            sb.Completed += (s, _) => this.Close();
+            sb.Completed += (s, _) =>
+            {
+                Application.Current.MainWindow.Opacity = 1;
+                this.Close();
+            };
             sb.Begin();
         }
 
         private void ExportPackageIDsButton_Click(object sender, RoutedEventArgs e)
         {
+            string selectedDevice = null;
+
+            if (mw.ADBFirstDevice.IsChecked == true)
+                selectedDevice = mw.ADBFirstDevice.Content.ToString();
+            else if (mw.ADBSecondDevice.IsChecked == true)
+                selectedDevice = mw.ADBSecondDevice.Content.ToString();
+            else if (mw.ADBThirdDevice.IsChecked == true)
+                selectedDevice = mw.ADBThirdDevice.Content.ToString();
+
             SaveFileDialog file = new SaveFileDialog
             {
-                FileName = "PackageID's",
+                FileName = $"PackageIDs_{selectedDevice}",
                 DefaultExt = ".txt",
                 Filter = "Text files (.txt) |*.txt "
             };
@@ -162,7 +210,7 @@ namespace ADBFastbootGUI.Windows
             if (result == true)
             {
                 File.WriteAllText(file.FileName, PackagesBox.Text);
-                MessageBox.Show("Package ID's exported!");
+                DialogBox.Show("Package ID's exported!");
             }
         }
     }

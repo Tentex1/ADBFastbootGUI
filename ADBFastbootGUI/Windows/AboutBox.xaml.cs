@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADBFastbootGUI.Themes;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,6 +25,45 @@ namespace ADBFastbootGUI.Windows
         public AboutBox()
         {
             InitializeComponent();
+
+            ThemeManagerHelper.ThemeChanged += OnThemeChanged;
+
+            this.Unloaded += (s, e) => ThemeManagerHelper.ThemeChanged -= OnThemeChanged;
+
+            ChangeTheme(ThemeManagerHelper.IsDarkTheme);
+        }
+
+        private void OnThemeChanged(bool isDark)
+        {
+            // Gelen bilgiye göre renkleri değiştiren metodu çağır.
+            ChangeTheme(isDark);
+        }
+        public void ChangeTheme(bool isDark)
+        {
+            System.Windows.Media.Brush foregroundBrush; // Tek bir değişkenle kodu kısaltalım.
+
+            if (isDark)
+            {
+                // Koyu Tema
+                foregroundBrush = System.Windows.Media.Brushes.White;
+                this.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(45, 45, 48));
+                Header.Foreground = foregroundBrush;
+                AuthorText.Foreground = foregroundBrush;
+                ProductNameText.Foreground = foregroundBrush;
+                GithubLink.Foreground = foregroundBrush;
+                VersionText.Foreground = foregroundBrush;
+            }
+            else
+            {
+                // Açık Tema
+                foregroundBrush = System.Windows.Media.Brushes.Black;
+                this.Background = System.Windows.Media.Brushes.WhiteSmoke; 
+                Header.Foreground = foregroundBrush;
+                AuthorText.Foreground = foregroundBrush;
+                ProductNameText.Foreground = foregroundBrush;
+                GithubLink.Foreground = foregroundBrush;
+                VersionText.Foreground = foregroundBrush;
+            }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

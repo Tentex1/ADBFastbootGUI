@@ -10,17 +10,23 @@
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterOwner"
-        Title="ProgramUninstallDialog" Height="143.927" Width="397.369">
+        Title="ProgramUninstallDialog" Height="508.3" Width="522.875">
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" ResizeBorderThickness="0" CaptionHeight="0" CornerRadius="20"/>
     </WindowChrome.WindowChrome>
 
     <Grid>
-        <Button x:Name="CancelButton" Content="Cancel" Width="90" Height="30" BorderThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Click="CancelButton_Click"/>
-        <TextBox x:Name="AppPackageIDTextBox" Height="23" Margin="31,44,31,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <Label x:Name="Header" Content="Enter the Package ID of the application you want to remove." HorizontalAlignment="Left" Margin="28,19,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="UninstallAppButton" Content="Uninstall" Width="90" Height="30" BorderThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,105,10" Click="UninstallAppButton_Click"/>
+        <TextBox x:Name="SearchBox" FontSize="15" Margin="10,34,10,0" Height="30" VerticalAlignment="Top" TextChanged="SearchBox_TextChanged" Style="{x:Null}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" BorderThickness="2" VerticalContentAlignment="Center"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,79,10,49">
+            <StackPanel x:Name="PackageListPanel"/>
+        </ScrollViewer>
+
+        <CheckBox x:Name="KeepDataCheckBox" Content="Keep the cache and data left by the program" FontSize="15" Margin="0,450,195,10"/>
+        <TextBlock x:Name="Title" Text="Packages" FontSize="20" HorizontalAlignment="Center" Margin="217,0,217,475"/>
+        <Button x:Name="CancelButton" Content="Cancel" Width="90" Height="30" BorderThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,10" Click="CancelButton_Click"/>
+        <Button x:Name="UninstallAppButton" Content="Uninstall" Width="90" Height="30" BorderThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,100,10" Click="UninstallAppButton_Click"/>
 
     </Grid>
 </Window>

@@ -72,6 +72,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -91,17 +92,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Themes\ThemeManagerHelper.cs" />
     <Compile Include="Windows\AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\FilesOptions.xaml.cs">
-      <DependentUpon>FilesOptions.xaml</DependentUpon>
+    <Compile Include="Windows\DialogBox.xaml.cs">
+      <DependentUpon>DialogBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Files\PullFileWindow.xaml.cs">
+      <DependentUpon>PullFileWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Files\SendFileWindow.xaml.cs">
+      <DependentUpon>SendFileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ProgramsListWindow.xaml.cs">
       <DependentUpon>ProgramsListWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ProgramsOptions.xaml.cs">
-      <DependentUpon>ProgramsOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ProgramUninstallDialog.xaml.cs">
       <DependentUpon>ProgramUninstallDialog.xaml</DependentUpon>
@@ -109,8 +114,11 @@
     <Compile Include="Windows\ProgressBar.xaml.cs">
       <DependentUpon>ProgressBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\RebootOptions.xaml.cs">
-      <DependentUpon>RebootOptions.xaml</DependentUpon>
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\WirelessConnectionWindow.xaml.cs">
+      <DependentUpon>WirelessConnectionWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -128,15 +136,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\FilesOptions.xaml">
+    <Page Include="Windows\DialogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Files\PullFileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Files\SendFileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ProgramsListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\ProgramsOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,7 +160,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\RebootOptions.xaml">
+    <Page Include="Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WirelessConnectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

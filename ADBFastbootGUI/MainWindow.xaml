@@ -10,6 +10,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -105,46 +106,258 @@
                     </TransformGroup>
                 </StackPanel.RenderTransform>
                 <Button x:Name="CloseButton" Style="{StaticResource ExitButton}" Content="X" Click="CloseButton_Click"/>
-                <Button x:Name="MinButton" Width="55" Height="30" Style="{StaticResource MinButton}" Content="–" Click="MinButton_Click"/>
+                <Button x:Name="MinButton" Width="55" Height="30" Style="{StaticResource MinButton}" Content="–" Click="MinButton_Click" />
+                <Button x:Name="SettingsButton" Width="55" Height="30" Style="{StaticResource MinButton}" Content="⚙️" Click="SettingsButton_Click" FontSize="20"/>
             </StackPanel>
 
             <Rectangle Height="1" Fill="Black" VerticalAlignment="Bottom"/>
 
         </Grid>
 
-        <Grid Grid.Row="1">
-            <TextBlock x:Name="ADBTitle" Text="ADB" FontSize="50" HorizontalAlignment="Left" Margin="30,10,0,110" FontWeight="Bold"/>
-            <TextBlock x:Name="FastbootTitle" FontSize="50" HorizontalAlignment="Right" Margin="0,10,13,110" FontWeight="Bold"><Run Text="Fastboot"/></TextBlock>
-            <StackPanel x:Name="ADBStackPanel" Orientation="Vertical" HorizontalAlignment="Left"
-                    Margin="14,70,0,150">
-                <Button x:Name="ShellButton" Content="Shell" Height="50" Width="135" FontSize="25" Margin="0,0,0,0" BorderThickness="0" Click="ShellButton_Click"/>
-                <Button x:Name="RebootButton" Content="Reboot" Height="50" Width="135" FontSize="25" Margin="0,10,0,10" BorderThickness="0" Click="RebootButton_Click"/>
-                <Button x:Name="AppsButton" Content="Apps" Height="50" Width="135" FontSize="25" Margin="0,0,0,10" BorderThickness="0" Click="ProgramsButton_Click"/>
-                <Button x:Name="FilesButton" Content="Files" Height="50" Width="135" FontSize="25" Margin="0,0,0,10" BorderThickness="0" Click="FilesButton_Click"/>
-            </StackPanel>
-            <StackPanel x:Name="FastbootStackPanel" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Margin="0,70,34,0">
-                <Button x:Name="FlashButton" Content="Flash" Height="50" Width="135" FontSize="25" Margin="0,0,0,10" BorderThickness="0" Click="FlashButton_Click"/>
-                <Button x:Name="FastbootRebootButton" Content="Reboot" Height="50" Width="135" FontSize="25" Margin="0,0,0,0" BorderThickness="0" Click="FastbootRebootButton_Click"/>
-                <Button x:Name="FastbootSidelodButton" Content="Sideload" Height="50" Width="135" FontSize="25" Margin="10" BorderThickness="0" Click="FastbootSidelodButton_Click"/>
-            </StackPanel>
-            <TextBlock x:Name="ADBDevicesTextBlock" Text="ADB Devices" FontSize="20" Margin="318,24,380,437"/>
-            <TextBlock x:Name="FastbootDevicesTextBlock" Text="Fastboot Devices" FontSize="20" Margin="300,242,350,219"/>
-            <TextBox x:Name="ADBDevicesTextBox" IsReadOnly="True" Height="200" Margin="166,42,433,263" MaxLines="4" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="FastbootDevicesTextBox" IsReadOnly="True" Height="200" Margin="166,262,433,43" MaxLines="4" BorderThickness="0" FontSize="20" HorizontalContentAlignment="Center"/>
-            <Button x:Name="KillServerButton" Content="Kill Server" Height="45" Width="150" FontSize="22" Margin="10,0,0,10" BorderThickness="0" Click="KillServerButton_Click"
-                VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
-            <Button x:Name="StartServerButton" Content="Start Server" Height="45" Width="150" FontSize="22" Margin="10,0,0,64" BorderThickness="0" Click="StartServerButton_Click"
-                VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="ADBDevices2TextBlock" Text="ADB Devices" FontSize="20" Margin="774,311,-76,150"/>
-            <TextBlock x:Name="FastbootDevices2TextBlock" Text="Fastboot Devices" FontSize="20" Margin="570,311,80,150"/>
-            <Rectangle Fill="Black" Width="1" Margin="742,311,240,21"/>
-            <RadioButton x:Name="ADBThirdDevice"  HorizontalAlignment="Left" Margin="750,445,0,21" FontSize="20" Width="208" Content="XXXX"/>
-            <RadioButton x:Name="ADBSecondDevice" HorizontalAlignment="Left" Margin="750,397,0,63" FontSize="20" Width="208" Content="XXXX"/>
-            <RadioButton x:Name="ADBFirstDevice" HorizontalAlignment="Left" Margin="750,350,0,110" FontSize="20" Width="208" Content="XXXX"/>
-            <RadioButton x:Name="FastbootThirdDevice"  HorizontalAlignment="Left" Margin="550,445,0,21" FontSize="20" Width="208" Content="XXXX"/>
-            <RadioButton x:Name="FastbootSecondDevice" HorizontalAlignment="Left" Margin="550,397,0,63" FontSize="20" Width="208" Content="XXXX"/>
-            <RadioButton x:Name="FastbootFirstDevice" HorizontalAlignment="Left" Margin="550,350,0,110" FontSize="20" Width="208" Content="XXXX"/>
-        </Grid>
+        <TabControl HorizontalAlignment="Left" Height="505" VerticalAlignment="Top" Width="983" Grid.Row="1" Style="{StaticResource MaterialDesignFilledTabControl}">
+            <TabItem x:Name="QSTab" Header="_Quick Processes">
+                <Grid x:Name="QSTabGrid">
+                    <GroupBox Header="Connection" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="213" Margin="760,10,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="WirelessConnectButton" Content="Wireless Connection" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="WirelessConnectButton_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="ADB" FontWeight="Bold" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="403" Margin="10,10,0,0">
+                        <Grid>
+                            <TextBlock x:Name="RebootingText" Text="Rebooting Processes" FontSize="18" Margin="104,90,104,54"/>
+                            <TextBlock x:Name="ServerText" Text="Server Processes" FontSize="18" Margin="118,52,118,92"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Button x:Name="ADBStartServerButton" Content="Start Server" Width="126" Height="47" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="StartServerButton_Click"/>
+                                <Button x:Name="ADBKillServerButton" Content="Kill Server" Width="126" Height="47" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="KillServerButton_Click"/>
+                            </StackPanel>
+
+                            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}"  Height="2"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Button x:Name="QRecoveryRebootButton" Content="Recovery" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="ARecoveryRebootButton_Click"/>
+                                <Button x:Name="QSystemRebootButton" Content="System" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="ASystemRebootButton_Click"/>
+                                <Button x:Name="QBootloaderRebootButton" Content="Bootloader" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="ABootloaderRebootButton_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Fastboot" FontWeight="Bold" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="402" Margin="10,233,0,0">
+                        <Grid>
+                            <TextBlock x:Name="LockingText" Text="Locking Processes" FontSize="18" Margin="110,54,120,90"/>
+                            <TextBlock x:Name="FRebootingText" Text="Rebooting Processes" FontSize="18" Margin="104,88,104,56"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                                <Button x:Name="QOEMUnlockButton" Content="Lock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="OEMUnlockButton_Click"/>
+                                <Button x:Name="QOEMLockButton" Content="Unlock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMLockButton_Click"/>
+                            </StackPanel>
+
+                            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Height="2" Grid.ColumnSpan="3" Margin="0,58,0,57"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,114,0,0">
+                                <Button x:Name="QRecoveryRebootButton1" Content="Recovery" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="FRecoveryRebootButton_Click"/>
+                                <Button x:Name="QSystemRebootButton1" Content="System" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FSystemRebootButton_Click"/>
+                                <Button x:Name="QBootloaderRebootButton1" Content="Bootloader" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FBootloaderRebootButton_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Scrcpy" FontWeight="Bold" HorizontalAlignment="Left" Height="198" VerticalAlignment="Top" Width="245" Margin="728,118,0,0">
+                        <Grid>
+                            <StackPanel Orientation="Vertical">
+                                <Button x:Name="QStartScreenMirroringButton" Content="Start Screen Mirroring" Click="StartScreenMirroringButton_Click" Height="40" FontSize="17" Width="210"/>
+                                <Button x:Name="QStartScreenRecordingButton" Content="Start Screen Recording" Click="StartRecordButton_Click" Height="40" FontSize="17" Width="210" Margin="0,10,0,0"/>
+                                <Button x:Name="QStartOTGButton" Content="Start OTG" Click="StartOTGButton_Click" Height="40" FontSize="17" Width="210" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ADBTab" Header="_ADB">
+                <Grid x:Name="ADBTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <StackPanel Orientation="Vertical" Margin="749,10,10,194">
+                        <TextBlock Text="Various" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                        <Button x:Name="ShellButton" Content="Shell" Height="50" Width="200" FontSize="27" BorderThickness="0" Click="ShellButton_Click" />
+                        <Button x:Name="LoggingButton" Content="Real-Time Log" Height="50" Width="200" FontSize="25" Margin="0,10,0,0" BorderThickness="0" Click="LoggingButton_Click" />
+                        <Button x:Name="GetDeviceInfoButton" Content="Get Device Info" Height="50" FontSize="25" Margin="0,10,0,0" BorderThickness="0" Click="GetDeviceInfoButton_Click" />
+                    </StackPanel>
+
+                    <GroupBox Header="Reboot (ADB)" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="430" Margin="10,10,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="RecoveryRebootButton" Content="Recovery" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="ARecoveryRebootButton_Click"/>
+                            <Button x:Name="SystemRebootButton" Content="System" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="ASystemRebootButton_Click"/>
+                            <Button x:Name="BootloaderRebootButton" Content="Bootloader" Width="120" Height="48" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="ABootloaderRebootButton_Click" />
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Apps" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="430" Margin="10,118,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="InstallAppButton" Content="Install" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="InstallAppButton_Click"/>
+                            <Button x:Name="UninstallAppButton" Content="Uninstall" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="UninstallAppButton_Click"/>
+                            <Button x:Name="ListAppsButton" Content="List" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="ListAppsButton_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Files" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="150" Margin="10,226,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="SendFileButton" Content="Send File" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="SendFileButton_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="FastbootTab" Header="_Fastboot">
+                <Grid x:Name="FastbootTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+
+                    <CheckBox x:Name="IsRebootEnded" Content="If flashing or erasing ends, reboot immediately." Margin="616,10,10,410" FontSize="16" IsChecked="True"/>
+
+                    <GroupBox Header="Reboot (Fastboot)" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="539" Margin="10,10,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="FRecoveryRebootButton" Content="Recovery" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="FRecoveryRebootButton_Click"/>
+                            <Button x:Name="FSystemRebootButton" Content="System" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FSystemRebootButton_Click"/>
+                            <Button x:Name="FBootloaderRebootButton" Content="Bootloader" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FBootloaderRebootButton_Click"/>
+                            <Button x:Name="FImageRebootButton" Content="Image" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FImageRebootButton_Click"/>
+                        </StackPanel>
+
+                    </GroupBox>
+
+                    <GroupBox Header="OEM Lock" FontWeight="Bold" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="291" Margin="10,118,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="OEMUnlockButton" Content="Lock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="OEMUnlockButton_Click"/>
+                            <Button x:Name="OEMLockButton" Content="Unlock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMLockButton_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Flash Partition" FontWeight="Bold" HorizontalAlignment="Center" Height="103" VerticalAlignment="Top" Width="963" Margin="0,344,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="FlashRecoveryButton" Content="Recovery" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="FlashRecoveryButton_Click"/>
+                            <Button x:Name="FlashBootButton" Content="Boot" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FlashBootButton_Click"/>
+                            <Button x:Name="FlashSystemButton" Content="System" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FlashSystemButton_Click"/>
+                            <Button x:Name="FlashVendorButton" Content="Vendor" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="FlashVendorButton_Click"/>
+                            <Button x:Name="FlashVbmetaButton" Content="vbmeta" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,10,0" Click="FlashVbmetaButton_Click"/>
+                            <Button x:Name="FlashDTBOButton" Content="dtbo" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Click="FlashDTBOButton_Click" Margin="0,0,10,0"/>
+                            <Button x:Name="FlashUserdataButton" Content="userdata" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Click="FlashUserdataButton_Click" Margin="0,2,0,0" VerticalAlignment="Top"/>
+
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Erase Partition" FontWeight="Bold" HorizontalAlignment="Center" Height="103" VerticalAlignment="Top" Width="963" Margin="0,236,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="EraseRecoveryButton" Content="Recovery" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="EraseRecoveryButton_Click"/>
+                            <Button x:Name="EraseBootButton" Content="Boot" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="EraseBootButton_Click"/>
+                            <Button x:Name="EraseSystemButton" Content="System" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="EraseSystemButton_Click"/>
+                            <Button x:Name="EraseVendorButton" Content="Vendor" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="EraseVendorButton_Click"/>
+                            <Button x:Name="EraseVbmetaButton" Content="vbmeta" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,10,0" Click="EraseVbmetaButton_Click"/>
+                            <Button x:Name="EraseDTBOButton" Content="dtbo" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Click="EraseDTBOButton_Click" Margin="0,0,10,0"/>
+                            <Button x:Name="EraseUserdataButton" Content="userdata" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Click="EraseUserdataButton_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ScrcpyTab" Header="_Scrcpy">
+                <Grid x:Name="ScrcpyTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <GroupBox Header="Screen Recording" FontWeight="Bold" Margin="10,10,735,234">
+                        <Grid>
+                            <TextBlock Text="Select Recording Output" FontWeight="Normal" FontSize="16" Margin="0,5,0,136" TextAlignment="Center"/>
+                            <CheckBox x:Name="RecordAudioCheckBox" Content="Audio (Android 11)" FontWeight="Normal" FontSize="17" IsChecked="True" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,64,0,0" Width="168"/>
+                            <CheckBox x:Name="RecordVideoCheckBox" Content="Video (Android 6.1)" FontWeight="Normal" FontSize="17" IsChecked="True" VerticalAlignment="Top" HorizontalAlignment="Center" Width="168" Margin="0,91,0,0"/>
+                            <Button x:Name="StartRecordButton" Content="Start Recording" FontSize="17" Click="StartRecordButton_Click" HorizontalAlignment="Center" Width="210" Margin="5,119,5,2" Height="40"/>
+                            <ComboBox x:Name="OutputFormatComboBox" VerticalAlignment="Top" Width="168" HorizontalAlignment="Center" SelectedIndex="0" Style="{x:Null}" FontWeight="Normal" FontSize="16" Margin="0,30,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                                <ComboBoxItem Content=".mp4"/>
+                                <ComboBoxItem Content=".mkv"/>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Mirroring" FontWeight="Bold" Margin="10,228,735,10">
+                        <Grid>
+                            <CheckBox x:Name="ScrcpyMirroringMirrorAudioCheckBox" Content="Audio (Android 11)" FontWeight="Normal" FontSize="17" IsChecked="True" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,64,0,0" Width="168"/>
+                            <TextBlock Text="Select Mirror Item" FontWeight="Normal" FontSize="16" Margin="39,5,39,141" TextAlignment="Center"/>
+                            <ComboBox x:Name="ScrcpyMirroringMirrorItemComboBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="39,29,39,0" VerticalAlignment="Top" SelectedIndex="0" Style="{x:Null}" FontWeight="Normal" FontSize="16">
+                                <ComboBoxItem Content="Screen"/>
+                                <ComboBoxItem Content="Camera:Front"/>
+                                <ComboBoxItem Content="Camera:Back"/>
+                                <ComboBoxItem Content="Camera:External"/>
+                            </ComboBox>
+                            <Button x:Name="StartMirroringButton" Content="Start Mirroring" Click="StartMirroringButton_Click" Height="40" FontSize="17" Width="210" Margin="5,124,5,3"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Config" FontWeight="Bold" Margin="730,10,10,330">
+                        <Grid>
+                            <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                                <TextBlock Text="FPS" FontSize="16" FontWeight="Normal" Height="18" Width="180"/>
+                                <TextBox x:Name="ScrcpyConfigFPSTextBox"
+                                         PreviewTextInput="ScrcpyConfigFPSTextBox_PreviewTextInput"
+                                         BorderBrush="#cddc39"
+                                         Text="60" 
+                                         FontSize="16" FontWeight="Normal"
+                                         Background="White" 
+                                         HorizontalContentAlignment="Center" 
+                                         VerticalContentAlignment="Center" 
+                                         HorizontalAlignment="Left" 
+                                         Margin="0,10,0,0" 
+                                         Width="68" 
+                                         BorderThickness="1" 
+                                         Style="{x:Null}"/>
+                            </StackPanel>
+
+                            <TextBlock Text="Video Codec" FontWeight="Normal" FontSize="16" TextAlignment="Center" Margin="112,6,13,36"/>
+
+                            <ComboBox x:Name="ScrcpyConfigVideoCodecComboBox" 
+                                      FontSize="16"
+                                      HorizontalContentAlignment="Center" 
+                                      VerticalContentAlignment="Center"
+                                      FontWeight="Normal"
+                                      Style="{x:Null}" Width="100" 
+                                      HorizontalAlignment="Right" 
+                                      VerticalAlignment="Top" 
+                                      SelectedIndex="0"
+                                      Margin="0,38,13,0">
+                                <ComboBoxItem Content="h264" />
+                                <ComboBoxItem Content="h265" />
+                                <ComboBoxItem Content="av1" />
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="OTG" FontWeight="Bold" Margin="704,132,10,195">
+                        <Grid>
+                            <ComboBox x:Name="ScrcpyOTGOption" Margin="10,0,10,55" Style="{x:Null}" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" FontWeight="Normal">
+                                <ComboBoxItem Content="Keyboard + Mouse"/>
+                                <ComboBoxItem Content="Gamepad"/>
+                            </ComboBox>
+                            <Button x:Name="StartOTGButton" Content="Start OTG" Click="StartOTGButton_Click" Height="40" FontSize="17" Margin="5,35,5,3"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="DevicesTab" Header="_Devices">
+                <Grid x:Name="DevicesTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <GroupBox Header="Connection (ADB)" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="231" Margin="742,10,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="QWirelessConnectButton" Content="Wireless Connection" Height="47.5" FontSize="17" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="WirelessConnectButton_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="ADB Devices" FontWeight="Bold" Margin="10,10,666,233">
+                        <Grid>
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="268" Height="158">
+                                <RadioButton x:Name="ADBFirstDevice" FontWeight="Normal"  HorizontalAlignment="Left" FontSize="20" Width="258" Content="XXXX"/>
+                                <RadioButton x:Name="ADBSecondDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="258" Content="XXXX"/>
+                                <RadioButton x:Name="ADBThirdDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="258" Content="XXXX"/>
+                                <RadioButton x:Name="ADBFourthDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="258" Content="XXXX"/>
+                                <RadioButton x:Name="ADBFifthDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="258" Content="XXXX"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Fastboot Devices" FontWeight="Bold" Margin="10,233,666,10">
+                        <Grid>
+                            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="270" Height="158">
+                                <RadioButton x:Name="FastbootFirstDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="208" Content="XXXX"/>
+                                <RadioButton x:Name="FastbootSecondDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="208" Content="XXXX"/>
+                                <RadioButton x:Name="FastbootThirdDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="208" Content="XXXX"/>
+                                <RadioButton x:Name="FastbootFourthDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="208" Content="XXXX"/>
+                                <RadioButton x:Name="FastbootFifthDevice" FontWeight="Normal" HorizontalAlignment="Left" FontSize="20" Width="208" Content="XXXX"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -10,14 +10,15 @@
         BorderThickness="0"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
-        Title="ProgressBar" Height="103.846" Width="391.903">
+        Title="ProgressBar" Height="164.48" Width="391.903">
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" ResizeBorderThickness="0" CaptionHeight="0" CornerRadius="20"/>
     </WindowChrome.WindowChrome>
 
     <Grid>
-        <TextBlock x:Name="Info" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10"/>
-        <ProgressBar x:Name="ADBServerStartingProgressBar" Minimum="0" Maximum="100" Height="35" Margin="20,20,20,0" Background="#FFCDDC39"/>
+        <TextBlock x:Name="Info" FontSize="20" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+        <ProgressBar x:Name="ADBServerStartingProgressBar" Minimum="0" Maximum="100" Height="35" Margin="20,68,20,53" Background="White" BorderBrush="Black" Foreground="Black" IsIndeterminate="True"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" Click="CloseButton_Click" Margin="159,0,159,7"/>
     </Grid>
 </Window>

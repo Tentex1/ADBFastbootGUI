@@ -24,6 +24,7 @@ namespace ADBFastbootGUI.Windows
     /// </summary>
     public partial class ProgressBar : Window
     {
+        MainWindow mw = new MainWindow();
         private DispatcherTimer _progressTimer;
         private DispatcherTimer _dotTimer;
         private int _progressValue = 0;
@@ -34,15 +35,15 @@ namespace ADBFastbootGUI.Windows
             InitializeComponent();
             StartProgressBar();
 
-            string adbpath = $@"C:\Program Files\ADBFastbootGUI\";
-            string komut = "adb start-server"; 
+            string adbpath = MainWindow.adbpath;
+            string command = "adb start-server"; 
 
             if (Directory.Exists(adbpath))
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
-                    Arguments = $"/k {komut}",
+                    Arguments = $"/K {command}",
                     WorkingDirectory = adbpath,
                     CreateNoWindow = true,     
                     UseShellExecute = false,   
@@ -58,7 +59,6 @@ namespace ADBFastbootGUI.Windows
                 Info.Text = "Reinstall this Program. Thanks for your Understanding";
                 _progressTimer.Stop();
                 _dotTimer.Stop();
-                MessageBoxResult result = MessageBox.Show("Folder Not found: " + adbpath);
             }
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -101,14 +101,14 @@ namespace ADBFastbootGUI.Windows
             _dotTimer.Tick += DotTick;
             _dotTimer.Start();
         }
-        private void ProgressTick(object sender, EventArgs e)
+        private async void ProgressTick(object sender, EventArgs e)
         {
             if (_progressValue >= 100)
             {
                 _progressTimer.Stop();
                 _dotTimer.Stop();
                 Info.Text = "ADB Server Started!";
-                Thread.Sleep(1000);
+                await Task.Delay(1000);
 
                 var sb = new Storyboard();
 
@@ -142,6 +142,11 @@ namespace ADBFastbootGUI.Windows
         {
             Info.Text = _dotStates[_dotStage];
             _dotStage = (_dotStage + 1) % _dotStates.Length;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

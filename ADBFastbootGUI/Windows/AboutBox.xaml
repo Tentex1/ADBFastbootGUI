@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:ADBFastbootGUI.Windows"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+        Background="{DynamicResource MaterialDesignPaper}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="AboutBox" Height="302.429" Width="402.834" ResizeMode="NoResize" ShowInTaskbar="False">
@@ -16,11 +17,12 @@
     </WindowChrome.WindowChrome>
 
     <Grid>
-        <TextBlock Text="Thanks for Downloading." FontSize="25" HorizontalAlignment="Center" Margin="20"/>
-        <TextBlock Text="Author: Tentex/duranforreal" FontSize="17" VerticalAlignment="Center" Margin="30,-80,0,0"/>
-        <TextBlock Text="Product Name: ADBFastbootGUI" FontSize="17" VerticalAlignment="Center" Margin="30,-30,0,0"/>
+        <TextBlock x:Name="Header" Text="Thanks for Downloading." FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,244"/>
+        <TextBlock x:Name="AuthorText" Text="Author: Tentex/duranforreal" FontSize="17" VerticalAlignment="Center" Margin="30,-80,0,0"/>
+        <TextBlock x:Name="ProductNameText" Text="Product Name: ADBFastbootGUI" FontSize="17" VerticalAlignment="Center" Margin="30,-30,0,0"/>
+        <TextBlock x:Name="VersionText" Text="Version: 2.0" FontSize="17" VerticalAlignment="Top" Margin="30,149,0,0"/>
         <TextBlock x:Name="GithubLink" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="120,205,0,33" TextDecorations="Underline" Cursor="Hand" Height="35">
-            <Hyperlink Click="GithubLink_Click" Foreground="Black">Github</Hyperlink>
+        <Hyperlink Click="GithubLink_Click" Foreground="Black">Github</Hyperlink>
         </TextBlock>
         <TextBlock x:Name="DonateLink" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,205,120,33" TextDecorations="Underline" Foreground="#FF008BFF" Cursor="Hand" Height="35">
             <Hyperlink Click="DonateLink_Click">Donate</Hyperlink>
