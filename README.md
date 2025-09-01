@@ -11,9 +11,10 @@ Manage your Android device without needing to use the command line!
 - `Shell` – Send terminal commands to the device  
 - `Reboot` – Reboot into system, bootloader, or recovery  
 - `Apps` – Install, uninstall, or list installed apps  
-- `Files` – Push/pull files to/from the device  
+- `Files` – Push files to/from the device  
 - `Start Server` – Start the ADB server  
-- `Kill Server` – Kill the ADB server  
+- `Kill Server` – Kill the ADB server
+- `Get Device Info` - Getting device info (Manufacturer, Serial NO and Device Model)
 
 ### ⚡ Fastboot Mode (when device is in Fastboot)
 - `Erase` - Erase partitions
