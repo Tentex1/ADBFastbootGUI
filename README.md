@@ -16,7 +16,8 @@ Manage your Android device without needing to use the command line!
 - `Kill Server` – Kill the ADB server  
 
 ### ⚡ Fastboot Mode (when device is in Fastboot)
-- `Flash` – Flash .img files or ROMs  
+- `Erase` - Erase partitions
+- `Flash` – Flash partitions  
 - `Reboot` – Reboot back to system  
 - `Sideload` – Sideload OTA updates from recovery
 
@@ -28,14 +29,6 @@ If your device doesn’t show up after plugging it in:
 
 > 📌 Just press **F5** to refresh the ADB and Fastboot device list.  
 > The interface will rescan and show all connected devices.
-
----
-
-## ⚠️ Known Bug
-
-- If you **hold down the F5 key** or **connect a device via USB**, the device list area might **duplicate or "clone" text**.
-- This is only a visual glitch — nothing serious.
-- ✅ **Solution:** Press **F5 once** to refresh the UI and clear the issue.
 
 ---
 
