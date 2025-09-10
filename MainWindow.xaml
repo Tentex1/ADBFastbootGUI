@@ -13,6 +13,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
         WindowStyle="None"
+        Loaded="MainWindow_Loaded"
+        Closing="MainWindow_Closing"
         WindowStartupLocation="CenterScreen"
         KeyDown="Window_KeyDown"
         Title="ADB and Fastboot GUI" Height="536" Width="982.688" ResizeMode="CanMinimize">
@@ -219,10 +221,11 @@
 
                     </GroupBox>
 
-                    <GroupBox Header="OEM Lock" FontWeight="Bold" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="291" Margin="10,118,0,0">
+                    <GroupBox Header="OEM Locking &amp; Info" FontWeight="Bold" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="425" Margin="10,118,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="OEMUnlockButton" Content="Lock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="OEMUnlockButton_Click"/>
-                            <Button x:Name="OEMLockButton" Content="Unlock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMLockButton_Click"/>
+                            <Button x:Name="OEMUnlockButton" Content="Unlock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="OEMUnlockButton_Click"/>
+                            <Button x:Name="OEMLockButton" Content="Lock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMLockButton_Click"/>
+                            <Button x:Name="OEMInfoButton" Content="Info" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMInfoButton_Click"/>
                         </StackPanel>
                     </GroupBox>
 

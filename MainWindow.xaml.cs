@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -27,8 +28,6 @@ namespace ADBFastbootGUI
 
         private IntPtr notificationHandle;
 
-        string programFiles = "Program Files (x86)";
-
         private SettingsWindow ssw;
 
         public List<string> deviceIds = new List<string>();
@@ -39,7 +38,6 @@ namespace ADBFastbootGUI
 
         public MainWindow()
         {
-            Loaded += MainWindow_Loaded;
             InitializeComponent();
             LoadDevices();
             LoadFastbootDevices();
@@ -129,7 +127,8 @@ namespace ADBFastbootGUI
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            SaveSettings();
+            Application.Current.Shutdown();
         }
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -409,12 +408,18 @@ namespace ADBFastbootGUI
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ssw = new SettingsWindow();
+            LoadSettings();
             Windows.ProgressBar pbar = new Windows.ProgressBar
             {
                 Owner = this
             };
             Opacity = 0.4;
             pbar.ShowDialog();
+
+            string path = System.IO.Path.Combine(adbpath, "adb.exe");
+            if (File.Exists(path)) { }
+            else { if (pbar.isCloseButtonClicked == true) { Application.Current.Shutdown(); } }
             Opacity = 1;
 
             var windowHandle = new WindowInteropHelper(this).Handle;
@@ -422,6 +427,64 @@ namespace ADBFastbootGUI
             source.AddHook(WndProc);
 
             RegisterUsbDeviceNotification(windowHandle);
+        }
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
+        private void SaveSettings()
+        {
+            using (StreamWriter sw = new StreamWriter("settings.txt"))
+            {
+                var selectedItem = ssw.ColorThemeComboBox.SelectedItem as ComboBoxItem;
+                sw.WriteLine("Theme=" + (ssw.ThemeCheckBox.IsChecked == true ? "Dark" : "Light"));
+                sw.WriteLine("ColorTheme=" + selectedItem.Content.ToString());
+                sw.WriteLine("FastbootAutoReboot=" + (IsRebootEnded.IsChecked == true ? "True" : "False"));
+            }
+        }
+
+        private void LoadSettings()
+        {
+            if (!File.Exists("settings.txt")) return;
+
+            var lines = File.ReadAllLines("settings.txt");
+            foreach (var line in lines)
+            {
+                var parts = line.Split('=');
+
+                // Satırda "=" yoksa atla
+                if (parts.Length < 2)
+                    continue;
+
+                string key = parts[0].Trim();
+                string value = parts[1].Trim();
+
+                switch (key)
+                {
+                    case "Theme":
+                        if (parts[1] == "Dark") ssw.ThemeCheckBox.IsChecked = true;
+                        else ssw.ThemeCheckBox.IsChecked = false;
+                        break;
+
+                    case "ColorTheme":
+                        for (int i = 0; i < ssw.ColorThemeComboBox.Items.Count; i++)
+                        {
+                            ComboBoxItem item = ssw.ColorThemeComboBox.Items[i] as ComboBoxItem;
+                            if (item != null && item.Content.ToString() == value)
+                            {
+                                ssw.ColorThemeComboBox.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                        ssw.SetColorThemeButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+
+                    case "FastbootAutoReboot":
+                        if (parts.Length < 2) break;
+                        bool.TryParse(parts[1].Trim(), out bool autoReboot);
+                        IsRebootEnded.IsChecked = autoReboot;
+                        break;
+                }
+            }
         }
 
         public void RegisterUsbDeviceNotification(IntPtr windowHandle)
@@ -485,7 +548,7 @@ namespace ADBFastbootGUI
                 string Control = System.IO.Path.Combine(adbpath, "adb.exe");
                 if (File.Exists(Control))
                 {
-                    string output = await Commander($"/K adb -s {selectedDevice} shell", "cmd.exe", false, true);
+                    string output = await Commander($"/C adb -s {selectedDevice} shell", "cmd.exe", false, true);
                 }
                 else
                 {
@@ -625,7 +688,7 @@ namespace ADBFastbootGUI
                 string Control = System.IO.Path.Combine(adbpath, "adb.exe");
                 if (File.Exists(Control))
                 {
-                    string output = await Commander($"/K adb -s {selectedDevice} reboot", "cmd.exe", true, false);
+                    string output = await Commander($"/C adb -s {selectedDevice} reboot", "cmd.exe", true, false);
 
                     if (string.IsNullOrWhiteSpace(output))
                         DialogBox.Show($"{selectedDevice}: Rebooting.");
@@ -1188,8 +1251,8 @@ namespace ADBFastbootGUI
 
                     if (result == true)
                     {
-                        string output = await Commander("/K fastboot flashing lock", "cmd.exe", false, true);
-                        string output2 = await Commander("/K fastboot oem lock", "cmd.exe", false, true);
+                        string output = await Commander("/C fastboot flashing lock", "cmd.exe", false, true);
+                        string output2 = await Commander("/C fastboot oem lock", "cmd.exe", false, true);
                     }
                 }
                 else
@@ -1819,6 +1882,36 @@ namespace ADBFastbootGUI
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private async void OEMInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedDevice = GetSelectedFastbootDevice();
+
+            string control = Path.Combine(adbpath, "fastboot.exe");
+            if (File.Exists(control))
+            {
+                if (selectedDevice == null)
+                    DialogBox.Show("CONNECT OR SELECT A DEVICE");
+                else
+                {
+                    string output = await Commander("/C fastboot oem device-info","cmd.exe",true,false);
+                    string[] lines = output.Split('\n');
+
+                    string[] firstThereLines = lines.Take(3).ToArray();
+
+                    string mesaj = string.Join(Environment.NewLine, firstThereLines);
+
+                    if (output.Contains("true") || output.Contains("false"))
+                        DialogBox.Show(output);
+                    else
+                        DialogBox.Show($"The lock status of the device with serial number {selectedDevice} cannot be retrieved.");
+                }
+            }
+            else
+            {
+                DialogBox.Show("fastboot.exe not found in Program Path.");
+            }
         }
     }
 }
