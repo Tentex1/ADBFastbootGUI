@@ -19,6 +19,6 @@
     <Grid>
         <TextBlock x:Name="Info" FontSize="20" Text="" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
         <ProgressBar x:Name="ADBServerStartingProgressBar" Minimum="0" Maximum="100" Height="35" Margin="20,68,20,53" Background="White" BorderBrush="Black" Foreground="Black" IsIndeterminate="True"/>
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" Click="CloseButton_Click" Margin="159,0,159,7"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" Click="CloseButton_Click" Margin="159,0,159,7" Visibility="Collapsed"/>
     </Grid>
 </Window>

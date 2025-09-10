@@ -25,6 +25,7 @@ namespace ADBFastbootGUI.Windows
     public partial class ProgressBar : Window
     {
         MainWindow mw = new MainWindow();
+        public bool isCloseButtonClicked;
         private DispatcherTimer _progressTimer;
         private DispatcherTimer _dotTimer;
         private int _progressValue = 0;
@@ -32,18 +33,20 @@ namespace ADBFastbootGUI.Windows
         private readonly string[] _dotStates = { "ADB Server Starting", "ADB Server Starting.", "ADB Server Starting..", "ADB Server Starting..."};
         public ProgressBar()
         {
+            isCloseButtonClicked = false;
             InitializeComponent();
             StartProgressBar();
 
             string adbpath = MainWindow.adbpath;
-            string command = "adb start-server"; 
+            string command = "adb start-server";
+            string file = System.IO.Path.Combine(adbpath, "adb.exe");
 
-            if (Directory.Exists(adbpath))
+            if (File.Exists(file))
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
-                    Arguments = $"/K {command}",
+                    Arguments = $"/C {command}",
                     WorkingDirectory = adbpath,
                     CreateNoWindow = true,     
                     UseShellExecute = false,   
@@ -57,6 +60,9 @@ namespace ADBFastbootGUI.Windows
             {
                 Info.FontSize = 15;
                 Info.Text = "Reinstall this Program. Thanks for your Understanding";
+                _progressTimer.Stop();
+                
+                CloseButton.Visibility = Visibility.Visible;
                 _progressTimer.Stop();
                 _dotTimer.Stop();
             }
@@ -146,7 +152,8 @@ namespace ADBFastbootGUI.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-
+            isCloseButtonClicked = true;
+            this.Close();
         }
     }
 }
