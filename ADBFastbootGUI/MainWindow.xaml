@@ -13,6 +13,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
         WindowStyle="None"
+        Loaded="MainWindow_Loaded"
+        Closing="MainWindow_Closing"
         WindowStartupLocation="CenterScreen"
         KeyDown="Window_KeyDown"
         Title="ADB and Fastboot GUI" Height="536" Width="982.688" ResizeMode="CanMinimize">
@@ -173,11 +175,12 @@
             </TabItem>
             <TabItem x:Name="ADBTab" Header="_ADB">
                 <Grid x:Name="ADBTabGrid" Background="{DynamicResource MaterialDesignPaper}">
-                    <StackPanel Orientation="Vertical" Margin="749,10,10,194">
+                    <StackPanel Orientation="Vertical" Margin="749,10,10,156">
                         <TextBlock Text="Various" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-                        <Button x:Name="ShellButton" Content="Shell" Height="50" Width="200" FontSize="27" BorderThickness="0" Click="ShellButton_Click" />
-                        <Button x:Name="LoggingButton" Content="Real-Time Log" Height="50" Width="200" FontSize="25" Margin="0,10,0,0" BorderThickness="0" Click="LoggingButton_Click" />
+                        <Button x:Name="ShellButton" Content="Shell" Height="50" FontSize="27" BorderThickness="0" Click="ShellButton_Click" />
+                        <Button x:Name="LoggingButton" Content="Real-Time Log" Height="50" FontSize="25" Margin="0,10,0,0" BorderThickness="0" Click="LoggingButton_Click" />
                         <Button x:Name="GetDeviceInfoButton" Content="Get Device Info" Height="50" FontSize="25" Margin="0,10,0,0" BorderThickness="0" Click="GetDeviceInfoButton_Click" />
+                        <Button x:Name="SideloadButton" Content="Sideload" Height="50" FontSize="25" Margin="0,10,0,0" BorderThickness="0" Click="FastbootSidelodButton_Click" />
                     </StackPanel>
 
                     <GroupBox Header="Reboot (ADB)" FontWeight="Bold" HorizontalAlignment="Left" Height="103" VerticalAlignment="Top" Width="430" Margin="10,10,0,0">
@@ -218,10 +221,11 @@
 
                     </GroupBox>
 
-                    <GroupBox Header="OEM Lock" FontWeight="Bold" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="291" Margin="10,118,0,0">
+                    <GroupBox Header="OEM Locking &amp; Info" FontWeight="Bold" HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="425" Margin="10,118,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="OEMUnlockButton" Content="Lock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="OEMUnlockButton_Click"/>
-                            <Button x:Name="OEMLockButton" Content="Unlock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMLockButton_Click"/>
+                            <Button x:Name="OEMUnlockButton" Content="Unlock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="0,0,0,0" Click="OEMUnlockButton_Click"/>
+                            <Button x:Name="OEMLockButton" Content="Lock" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMLockButton_Click"/>
+                            <Button x:Name="OEMInfoButton" Content="Info" Width="120" Height="47.5" FontSize="17" BorderThickness="0" Margin="10,0,0,0" Click="OEMInfoButton_Click"/>
                         </StackPanel>
                     </GroupBox>
 
