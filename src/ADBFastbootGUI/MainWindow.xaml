@@ -1,0 +1,857 @@
+﻿<Window x:Class="ADBFastbootGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:ADBFastbootGUI" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="ADB and Fastboot GUI"
+        Width="982.688" Height="536"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        KeyDown="Window_KeyDown" Loaded="MainWindow_Loaded" ResizeMode="CanMinimize" TextElement.FontSize="13" TextElement.FontWeight="Regular" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style x:Key="ExitButton" TargetType="Button">
+            <Setter Property="Width" Value="55" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#c42b1c" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#912014" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MinButton" TargetType="Button">
+            <Setter Property="Width" Value="55" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF007ACC" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF3399FF" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" CornerRadius="20" GlassFrameThickness="0" ResizeBorderThickness="0" />
+    </WindowChrome.WindowChrome>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Button x:Name="AboutMenuItem"
+                    Width="180"
+                    Margin="0,0,803,0" Panel.ZIndex="2"
+                    Background="Transparent" BorderThickness="0" Click="Header_Click" Content="ADB and Fastboot GUI" />
+            <StackPanel Width="805"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Background="Transparent" MouseDown="TopPanel_MouseDown" Orientation="Horizontal" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <Button x:Name="CloseButton"
+                        Click="CloseButton_Click"
+                        Style="{StaticResource ExitButton}">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="Segoe Fluent Icons" Text="&#xE8BB;" />
+                    <Button.ToolTip>
+                        <ToolTip Content="Close"
+                                 Style="{x:Null}"
+                                 ToolTipService.InitialShowDelay="2000" />
+                    </Button.ToolTip>
+                </Button>
+                <Button x:Name="MinButton"
+                        Width="55" Height="30"
+                        Click="MinButton_Click"
+                        Style="{StaticResource MinButton}">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="Segoe Fluent Icons" Text="&#xE921;" />
+                    <Button.ToolTip>
+                        <ToolTip Content="Minimize"
+                                 Style="{x:Null}"
+                                 ToolTipService.InitialShowDelay="2000" />
+                    </Button.ToolTip>
+                </Button>
+                <Button x:Name="SettingsButton"
+                        Width="55" Height="30"
+                        Click="SettingsButton_Click" FontSize="20"
+                        Style="{StaticResource MinButton}">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontFamily="Segoe Fluent Icons" FontSize="18" Text="&#xE713;" />
+                    <Button.ToolTip>
+                        <ToolTip Content="Settings"
+                                 Style="{x:Null}"
+                                 ToolTipService.InitialShowDelay="2000" />
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+
+            <Rectangle Height="1"
+                       VerticalAlignment="Bottom"
+                       Fill="Black" />
+
+        </Grid>
+
+        <TabControl Grid.Row="1"
+                    Width="983" Height="505"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Background="{DynamicResource MaterialDesignPaper}"
+                    Style="{StaticResource MaterialDesignFilledTabControl}">
+            <TabItem x:Name="QSTab" Header="_Quick Processes">
+                <Grid x:Name="QSTabGrid">
+                    <GroupBox Width="213" Height="103"
+                              Margin="760,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Connection">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="WirelessConnectButton"
+                                    Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="WirelessConnectButton_Click" Content="Wireless Connection" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="ADB is for connecting to your device wirelessly." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Width="403" Height="218"
+                              Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="ADB">
+                        <Grid>
+                            <TextBlock x:Name="RebootingText"
+                                       Margin="104,90,104,54"
+                                       FontSize="18" Text="Rebooting Processes" />
+                            <TextBlock x:Name="ServerText"
+                                       Margin="118,52,118,92"
+                                       FontSize="18" Text="Server Processes" />
+
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                <Button x:Name="ADBStartServerButton"
+                                        Width="126" Height="47"
+                                        Margin="0,0,0,0"
+                                        BorderThickness="0" Click="StartServerButton_Click" Content="Start Server" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Starts ADB server." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="ADBKillServerButton"
+                                        Width="126" Height="47"
+                                        Margin="10,0,0,0"
+                                        BorderThickness="0" Click="KillServerButton_Click" Content="Kill Server" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Closes (Kills) ADB server." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
+
+                            <Rectangle Height="2" Fill="{DynamicResource PrimaryHueMidBrush}" />
+
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                <Button x:Name="QRecoveryRebootButton"
+                                        Width="120" Height="47.5"
+                                        Margin="0,0,0,0"
+                                        BorderThickness="0" Click="ARecoveryRebootButton_Click" Content="Recovery" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Restarts the device to enter Recovery mode." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QSystemRebootButton"
+                                        Width="120" Height="47.5"
+                                        Margin="10,0,0,0"
+                                        BorderThickness="0" Click="ASystemRebootButton_Click" Content="System" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Restarts the device." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QBootloaderRebootButton"
+                                        Width="120" Height="47.5"
+                                        Margin="10,0,0,0"
+                                        BorderThickness="0" Click="ABootloaderRebootButton_Click" Content="Bootloader" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Restarts the device to enter Bootloader mode." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Width="402" Height="218"
+                              Margin="10,233,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Fastboot">
+                        <Grid>
+                            <TextBlock x:Name="LockingText"
+                                       Margin="110,54,120,90"
+                                       FontSize="18" Text="Locking Processes" />
+                            <TextBlock x:Name="FRebootingText"
+                                       Margin="104,88,104,56"
+                                       FontSize="18" Text="Rebooting Processes" />
+
+                            <StackPanel Grid.ColumnSpan="2"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                <Button x:Name="QOEMUnlockButton"
+                                        Width="120" Height="47.5"
+                                        Margin="0,0,0,0"
+                                        BorderThickness="0" Click="OEMUnlockButton_Click" Content="Lock" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Locks Bootloader." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QOEMLockButton"
+                                        Width="120" Height="47.5"
+                                        Margin="10,0,0,0"
+                                        BorderThickness="0" Click="OEMLockButton_Click" Content="Unlock" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Unlocks Bootloader." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
+
+                            <Rectangle Grid.ColumnSpan="3"
+                                       Height="2"
+                                       Margin="0,58,0,57"
+                                       Fill="{DynamicResource PrimaryHueMidBrush}" />
+
+                            <StackPanel Margin="0,114,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                <Button x:Name="QRecoveryRebootButton1"
+                                        Width="120" Height="47.5"
+                                        Margin="0,0,0,0"
+                                        BorderThickness="0" Click="FRecoveryRebootButton_Click" Content="Recovery" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Restarts the device to enter Recovery mode." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QSystemRebootButton1"
+                                        Width="120" Height="47.5"
+                                        Margin="10,0,0,0"
+                                        BorderThickness="0" Click="FSystemRebootButton_Click" Content="System" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Restarts the device to enter System." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QBootloaderRebootButton1"
+                                        Width="120" Height="47.5"
+                                        Margin="10,0,0,0"
+                                        BorderThickness="0" Click="FBootloaderRebootButton_Click" Content="Bootloader" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Restarts the device to enter Bootloader mode." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Width="245" Height="198"
+                              Margin="728,118,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Scrcpy">
+                        <Grid>
+                            <StackPanel Orientation="Vertical">
+                                <Button x:Name="QStartScreenMirroringButton"
+                                        Width="210" Height="40"
+                                        Click="StartScreenMirroringButton_Click" Content="Start Screen Mirroring" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Mirrors the device's screen." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QStartScreenRecordingButton"
+                                        Width="210" Height="40"
+                                        Margin="0,10,0,0"
+                                        Click="StartRecordButton_Click" Content="Start Screen Recording" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Records the device's screen." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                                <Button x:Name="QStartOTGButton"
+                                        Width="210" Height="40"
+                                        Margin="0,10,0,0"
+                                        Click="StartOTGButton_Click" Content="Start OTG" FontSize="17">
+                                    <Button.ToolTip>
+                                        <ToolTip Content="Initiates OTG connection of device (PC Keyboard, PC Mouse)." ToolTipService.InitialShowDelay="2000" />
+                                    </Button.ToolTip>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ADBTab" Header="_ADB">
+                <Grid x:Name="ADBTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <StackPanel Margin="749,10,10,156" Orientation="Vertical">
+                        <TextBlock Margin="0,0,0,10" HorizontalAlignment="Center"
+                                   FontSize="30" Text="Various" />
+                        <Button x:Name="ShellButton"
+                                Height="50"
+                                BorderThickness="0" Click="ShellButton_Click" Content="Shell" FontSize="27">
+                            <Button.ToolTip>
+                                <ToolTip Content="Opens ADB Shell for the selected device." ToolTipService.InitialShowDelay="2000" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button x:Name="LoggingButton"
+                                Height="50"
+                                Margin="0,10,0,0"
+                                BorderThickness="0" Click="LoggingButton_Click" Content="Real-Time Log" FontSize="25">
+                            <Button.ToolTip>
+                                <ToolTip Content="Instantly logs the transactions taking place on your phone." ToolTipService.InitialShowDelay="2000" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button x:Name="GetDeviceInfoButton"
+                                Height="50"
+                                Margin="0,10,0,0"
+                                BorderThickness="0" Click="GetDeviceInfoButton_Click" Content="Get Device Info" FontSize="25">
+                            <Button.ToolTip>
+                                <ToolTip Content="Gets information (Model, Manufacturer and Serial no) of the selected Device" ToolTipService.InitialShowDelay="2000" />
+                            </Button.ToolTip>
+                        </Button>
+                        <Button x:Name="SideloadButton"
+                                Height="50"
+                                Margin="0,10,0,0"
+                                BorderThickness="0" Click="FastbootSidelodButton_Click" Content="Sideload" FontSize="25">
+                            <Button.ToolTip>
+                                <ToolTip Content="Allows you to sideload if the selected device is in sideload mode." ToolTipService.InitialShowDelay="2000" />
+                            </Button.ToolTip>
+                        </Button>
+                    </StackPanel>
+
+                    <GroupBox Width="430" Height="103"
+                              Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Reboot (ADB)">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="RecoveryRebootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="ARecoveryRebootButton_Click" Content="Recovery" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Restarts the device to enter Recovery mode." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="SystemRebootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="ASystemRebootButton_Click" Content="System" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Restarts the device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="BootloaderRebootButton"
+                                    Width="120" Height="48"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="ABootloaderRebootButton_Click" Content="Bootloader" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Restarts the device to enter Bootloader mode." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Width="430" Height="103"
+                              Margin="10,118,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Apps">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="InstallAppButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="InstallAppButton_Click" Content="Install" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="It allows you to install applications (apk) on your device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="UninstallAppButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="UninstallAppButton_Click" Content="Uninstall" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Allows you to remove applications from your device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="ListAppsButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="ListAppsButton_Click" Content="List" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="It shows everything (apps, services) installed on your device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Width="150" Height="103"
+                              Margin="10,226,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Files">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="SendFileButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="SendFileButton_Click" Content="Send File" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="It allows you to send files to your device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="FastbootTab" Header="_Fastboot">
+                <Grid x:Name="FastbootTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+
+                    <StackPanel Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Orientation="Vertical">
+                        <CheckBox x:Name="IsRebootEnded"
+                                  Margin="0,0,0,10"
+                                  Content="If flashing or erasing ends, reboot immediately." FontSize="16" IsChecked="True" />
+                        <CheckBox x:Name="IsDisableVerity"
+                                  Margin="0,0,0,10"
+                                  Content="Disable Verity (vbmeta only)" FontSize="16" IsChecked="False" />
+                        <CheckBox x:Name="IsDisableVerification"
+                                  Content="Disable Verification (vbmeta only)" FontSize="16" IsChecked="False" />
+                    </StackPanel>
+
+                    <GroupBox Width="539" Height="103"
+                              Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Reboot (Fastboot)">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="FRecoveryRebootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="FRecoveryRebootButton_Click" Content="Recovery" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Restarts the device to enter Recovery mode." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="FSystemRebootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="FSystemRebootButton_Click" Content="System" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Restarts the device to enter System." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="FBootloaderRebootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="FBootloaderRebootButton_Click" Content="Bootloader" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Restarts the device to enter Bootloader mode." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="FImageRebootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="FImageRebootButton_Click" Content="Image" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="To boot the device from Image.." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+
+                    </GroupBox>
+
+                    <GroupBox Width="425" Height="113"
+                              Margin="10,118,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="OEM Locking &amp; Info">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="OEMUnlockButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="OEMUnlockButton_Click" Content="Unlock" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Unlocks Bootloader." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="OEMLockButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="OEMLockButton_Click" Content="Lock" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Locks Bootloader." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="OEMInfoButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="OEMInfoButton_Click" Content="Info" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Gets information about the device's bootloader." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Width="963" Height="103"
+                              Margin="0,344,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Flash Partition">
+                        <GroupBox.ToolTip>
+                            <ToolTip Content="You can flash images to the above sections." ToolTipService.InitialShowDelay="1" />
+                        </GroupBox.ToolTip>
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="FlashRecoveryButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="FlashRecoveryButton_Click" Content="Recovery" FontSize="17" />
+                            <Button x:Name="FlashBootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="FlashBootButton_Click" Content="Boot" FontSize="17" />
+                            <Button x:Name="FlashSystemButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="FlashSystemButton_Click" Content="System" FontSize="17" />
+                            <Button x:Name="FlashVendorButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="FlashVendorButton_Click" Content="Vendor" FontSize="17" />
+                            <Button x:Name="FlashVbmetaButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,10,0"
+                                    BorderThickness="0" Click="FlashVbmetaButton_Click" Content="vbmeta" FontSize="17" />
+                            <Button x:Name="FlashDTBOButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,10,0"
+                                    BorderThickness="0" Click="FlashDTBOButton_Click" Content="dtbo" FontSize="17" />
+                            <Button x:Name="FlashUserdataButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,2,0,0" VerticalAlignment="Top"
+                                    BorderThickness="0" Click="FlashUserdataButton_Click" Content="userdata" FontSize="17" />
+
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Width="963" Height="103"
+                              Margin="0,236,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Erase Partition">
+                        <GroupBox.ToolTip>
+                            <ToolTip Content="You can clear the above sections." ToolTipService.InitialShowDelay="1" />
+                        </GroupBox.ToolTip>
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="EraseRecoveryButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,0,0"
+                                    BorderThickness="0" Click="EraseRecoveryButton_Click" Content="Recovery" FontSize="17" />
+                            <Button x:Name="EraseBootButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="EraseBootButton_Click" Content="Boot" FontSize="17" />
+                            <Button x:Name="EraseSystemButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="EraseSystemButton_Click" Content="System" FontSize="17" />
+                            <Button x:Name="EraseVendorButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="0" Click="EraseVendorButton_Click" Content="Vendor" FontSize="17" />
+                            <Button x:Name="EraseVbmetaButton"
+                                    Width="120" Height="47.5"
+                                    Margin="10,0,10,0"
+                                    BorderThickness="0" Click="EraseVbmetaButton_Click" Content="vbmeta" FontSize="17" />
+                            <Button x:Name="EraseDTBOButton"
+                                    Width="120" Height="47.5"
+                                    Margin="0,0,10,0"
+                                    BorderThickness="0" Click="EraseDTBOButton_Click" Content="dtbo" FontSize="17" />
+                            <Button x:Name="EraseUserdataButton"
+                                    Width="120" Height="47.5"
+                                    BorderThickness="0" Click="EraseUserdataButton_Click" Content="userdata" FontSize="17" />
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="FastbootAdvancedTab" Header="_Fastboot (Advanced)">
+                <Grid x:Name="FastbootAdvancedTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <GroupBox Width="357" Height="102"
+                              Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              Header="GSI Flashing (DSU Loader / UNTESTED)">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button x:Name="FastbootGSIEnableButton"
+                                    Width="155" Height="47"
+                                    Margin="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Click="FastbootGSIEnableButton_OnClick" Content="DSU Loader enable">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Enables DSU Loader (GSI Flasing)." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="FastbootGSIDisableButton"
+                                    Width="155" Height="47"
+                                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Click="FastbootGSIDisableButton_OnClick" Content="DSU Loader disable">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Disables DSU LOader(GSI Flashing)." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Width="605" Height="105"
+                              Margin="10,117,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              Header="Partition Management (UNTESTED)">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button x:Name="FastbootCreatePartitionButton"
+                                    Width="187" Height="47"
+                                    Margin="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Click="FastbootCreatePartitionButton_Click" Content="Create Logical Partition">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Creates a logical partition on your device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="FastbootErasePartitionButton"
+                                    Width="177" Height="47"
+                                    Margin="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Click="FastbootErasePartitionButton_Click" Content="Erase Logical Partition">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Erases logical partition on your device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <Button x:Name="FastbootResizePartitionButton"
+                                    Width="180" Height="47"
+                                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                                    Click="FastbootResizePartitionButton_Click" Content="Resize Logical Partition">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Resizes the logical partition you created." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="ScrcpyTab" Header="_Scrcpy">
+                <Grid x:Name="ScrcpyTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <GroupBox Margin="10,10,735,234"
+                              FontWeight="Bold" Header="Screen Recording">
+                        <Grid>
+                            <TextBlock Margin="0,5,0,136"
+                                       FontSize="16" FontWeight="Normal" Text="Select Recording Output" TextAlignment="Center" />
+                            <CheckBox x:Name="RecordAudioCheckBox"
+                                      Width="168"
+                                      Margin="0,64,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                      Content="Audio (Android 11)" FontSize="17" FontWeight="Normal" IsChecked="True" />
+                            <CheckBox x:Name="RecordVideoCheckBox"
+                                      Width="168"
+                                      Margin="0,91,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                      Content="Video (Android 6.1)" FontSize="17" FontWeight="Normal" IsChecked="True" />
+                            <Button x:Name="StartRecordButton"
+                                    Width="210" Height="40"
+                                    Margin="5,119,5,2" HorizontalAlignment="Center"
+                                    Click="StartRecordButton_Click" Content="Start Recording" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Records the device's screen." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                            <ComboBox x:Name="OutputFormatComboBox"
+                                      Width="168"
+                                      Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                      FontSize="16" FontWeight="Normal" SelectedIndex="0"
+                                      Style="{x:Null}">
+                                <ComboBoxItem Content=".mp4" />
+                                <ComboBoxItem Content=".mkv" />
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="10,228,735,10"
+                              FontWeight="Bold" Header="Mirroring">
+                        <Grid>
+                            <CheckBox x:Name="ScrcpyMirroringMirrorAudioCheckBox"
+                                      Width="168"
+                                      Margin="0,64,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                      Content="Audio (Android 11)" FontSize="17" FontWeight="Normal" IsChecked="True" />
+                            <TextBlock Margin="39,5,39,141"
+                                       FontSize="16" FontWeight="Normal" Text="Select Mirror Item" TextAlignment="Center" />
+                            <ComboBox x:Name="ScrcpyMirroringMirrorItemComboBox"
+                                      Margin="39,29,39,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                      FontSize="16" FontWeight="Normal" SelectedIndex="0"
+                                      Style="{x:Null}">
+                                <ComboBoxItem Content="Screen" />
+                                <ComboBoxItem Content="Camera:Front" />
+                                <ComboBoxItem Content="Camera:Back" />
+                                <ComboBoxItem Content="Camera:External" />
+                            </ComboBox>
+                            <Button x:Name="StartMirroringButton"
+                                    Width="210" Height="40"
+                                    Margin="5,124,5,3"
+                                    Click="StartMirroringButton_Click" Content="Start Mirroring" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Mirrors the device's screen." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="730,10,10,330"
+                              FontWeight="Bold" Header="Config">
+                        <GroupBox.ToolTip>
+                            <ToolTip Content="Configure video options" ToolTipService.InitialShowDelay="2000" />
+                        </GroupBox.ToolTip>
+
+                        <Grid>
+                            <StackPanel Margin="10,10,0,0" Orientation="Vertical">
+                                <TextBlock Width="180" Height="18"
+                                           FontSize="16" FontWeight="Normal" Text="FPS" />
+                                <TextBox x:Name="ScrcpyConfigFPSTextBox"
+                                         Width="68"
+                                         Margin="0,10,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                         Background="White" BorderBrush="#cddc39" BorderThickness="1" FontSize="16" FontWeight="Normal" PreviewTextInput="ScrcpyConfigFPSTextBox_PreviewTextInput"
+                                         Style="{x:Null}"
+                                         Text="60" />
+                            </StackPanel>
+
+                            <TextBlock Margin="112,6,13,36"
+                                       FontSize="16" FontWeight="Normal" Text="Video Codec" TextAlignment="Center" />
+
+                            <ComboBox x:Name="ScrcpyConfigVideoCodecComboBox"
+                                      Width="100"
+                                      Margin="0,38,13,0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                      FontSize="16" FontWeight="Normal" SelectedIndex="0"
+                                      Style="{x:Null}">
+                                <ComboBoxItem Content="h264" />
+                                <ComboBoxItem Content="h265" />
+                                <ComboBoxItem Content="av1" />
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="704,132,10,195"
+                              FontWeight="Bold" Header="OTG">
+                        <Grid>
+                            <ComboBox x:Name="ScrcpyOTGOption"
+                                      Margin="10,0,10,55" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                      FontSize="16" FontWeight="Normal" SelectedIndex="0"
+                                      Style="{x:Null}">
+                                <ComboBoxItem Content="Keyboard + Mouse" />
+                                <ComboBoxItem Content="Gamepad" />
+                            </ComboBox>
+                            <Button x:Name="StartOTGButton"
+                                    Height="40"
+                                    Margin="5,35,5,3"
+                                    Click="StartOTGButton_Click" Content="Start OTG" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="Initiates OTG connection of device." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="DevicesTab" Header="_Devices">
+                <Grid x:Name="DevicesTabGrid" Background="{DynamicResource MaterialDesignPaper}">
+                    <GroupBox Width="231" Height="103"
+                              Margin="742,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                              FontWeight="Bold" Header="Connection (ADB)">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="QWirelessConnectButton"
+                                    Height="47.5"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    BorderThickness="0" Click="WirelessConnectButton_Click" Content="Wireless Connection" FontSize="17">
+                                <Button.ToolTip>
+                                    <ToolTip Content="ADB is for connecting to your device wirelessly." ToolTipService.InitialShowDelay="2000" />
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Margin="10,10,666,233"
+                              FontWeight="Bold" Header="ADB Devices">
+                        <Grid>
+                            <StackPanel Width="268" Height="158"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <RadioButton x:Name="ADBFirstDevice"
+                                             Width="258"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="ADBSecondDevice"
+                                             Width="258"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="ADBThirdDevice"
+                                             Width="258"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="ADBFourthDevice"
+                                             Width="258"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="ADBFifthDevice"
+                                             Width="258"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="10,233,666,10"
+                              FontWeight="Bold" Header="Fastboot Devices">
+                        <Grid>
+                            <StackPanel Width="270" Height="158"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <RadioButton x:Name="FastbootFirstDevice"
+                                             Width="208"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="FastbootSecondDevice"
+                                             Width="208"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="FastbootThirdDevice"
+                                             Width="208"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="FastbootFourthDevice"
+                                             Width="208"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                                <RadioButton x:Name="FastbootFifthDevice"
+                                             Width="208"
+                                             HorizontalAlignment="Left"
+                                             Content="XXXX" FontSize="20" FontWeight="Normal" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
