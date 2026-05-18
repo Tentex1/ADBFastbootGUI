@@ -20,7 +20,7 @@
         <TextBlock x:Name="Header" Text="Thanks for Downloading." FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,244"/>
         <TextBlock x:Name="AuthorText" Text="Author: Tentex/duranforreal" FontSize="17" VerticalAlignment="Center" Margin="30,-80,0,0"/>
         <TextBlock x:Name="ProductNameText" Text="Product Name: ADBFastbootGUI" FontSize="17" VerticalAlignment="Center" Margin="30,-30,0,0"/>
-        <TextBlock x:Name="VersionText" Text="Version: 2.0.2" FontSize="17" VerticalAlignment="Top" Margin="30,149,0,0"/>
+        <TextBlock x:Name="VersionText" Text="Version: 2.0.4" FontSize="17" VerticalAlignment="Top" Margin="30,149,0,0"/>
         <TextBlock x:Name="GithubLink" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="120,205,0,33" TextDecorations="Underline" Cursor="Hand" Height="35">
         <Hyperlink Click="GithubLink_Click" Foreground="Black">Github</Hyperlink>
         </TextBlock>
