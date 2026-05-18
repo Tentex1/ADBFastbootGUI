@@ -6,25 +6,6 @@ No more command-line hassle! Manage your device safely, smoothly, and cleanly wi
 
 ---
 
-## 🌟 What's New? (Architectural Modernization)
-
-This project has been completely refactored to meet premium enterprise development standards:
-
-- **🚀 100% Asynchronous & Non-Blocking Engine**: All external process calls (`adb.exe`, `fastboot.exe`, `scrcpy.exe`) run on isolated background threads via async-await. The UI remains fully responsive (60+ FPS) even during heavy flashing or command executions.
-- **🏗️ Modern MVVM Architecture**: Built with a custom, lightweight MVVM infrastructure (`ViewModelBase` implementing `INotifyPropertyChanged` and asynchronous `RelayCommand`), decoupling business logic from the view layer.
-- **🟢 Dynamic Titlebar Status Capsule**: A macOS/Windows 11 inspired premium status badge centered on the titlebar:
-  - Dynamically queries and displays the actual device model name asynchronously.
-  - Automatically transitions colors and icons based on connection state:
-    - 🔴 **Disconnected**: Dark red warning capsule with a warning icon (`AlertCircleOutline`).
-    - 🟢 **ADB Connected**: Emerald green capsule with a cellphone-check icon (`CellphoneCheck`) showing your device model.
-    - ⚡ **Fastboot Connected**: Premium orange capsule with a lightning bolt icon (`Flash`) showing fastboot product name.
-- **♾️ Infinite Device Support**: Replaced old hardcoded 5-device limit controls with modern, Material Design-styled dynamic data-bound `ListBox` components. Connect and manage 5, 50, or 500 devices seamlessly!
-- **🔄 Smart Virtual Compatibility Layer**: Implemented virtual properties inside `MainWindow.xaml.cs` mimicking the old RadioButtons. This ensures **100% backward compatibility** for all secondary dialog windows without breaking their existing code!
-- **🛡️ Flashing Safety Shields**: Integrated safety warning gates (`MessageBoxResult`) before executing dangerous logical partition operations to prevent accidental device bricking.
-- **🧹 Auto-Cleanup on Exit**: Overrode `OnClosing` and used `Environment.Exit(0)` to instantly terminate the application and safely kill any lingering background processes (`adb`, `fastboot`, `scrcpy`) to prevent port locking and resource leaks.
-
----
-
 ## 🧩 Core Features
 
 ### 🔹 ADB Mode (when device is booted)
