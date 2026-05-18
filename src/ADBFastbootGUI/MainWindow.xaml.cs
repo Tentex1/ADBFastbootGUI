@@ -1,4 +1,4 @@
-﻿using ADBFastbootGUI.Themes;
+using ADBFastbootGUI.Themes;
 using ADBFastbootGUI.Windows;
 using ADBFastbootGUI.Windows.PartitionManagement;
 using Microsoft.Win32;
@@ -36,11 +36,71 @@ namespace ADBFastbootGUI
         public static string adbpath = $@".\";
 
         Process cmdprocess;
+
+        public ViewModels.MainViewModel ViewModel { get; set; }
+        private Services.AdbService _adbService;
+        private Services.FastbootService _fastbootService;
+
+        private RadioButton GetAdbDeviceRadioButton(int index)
+        {
+            var rb = new RadioButton();
+            if (ViewModel != null && ViewModel.AdbDevices.Count > index)
+            {
+                string dev = ViewModel.AdbDevices[index];
+                rb.Content = dev;
+                rb.IsEnabled = true;
+                rb.IsChecked = (ViewModel.SelectedAdbDevice == dev);
+            }
+            else
+            {
+                rb.Content = "Device Not Found";
+                rb.IsEnabled = false;
+                rb.IsChecked = false;
+            }
+            return rb;
+        }
+
+        private RadioButton GetFastbootDeviceRadioButton(int index)
+        {
+            var rb = new RadioButton();
+            if (ViewModel != null && ViewModel.FastbootDevices.Count > index)
+            {
+                string dev = ViewModel.FastbootDevices[index];
+                rb.Content = dev;
+                rb.IsEnabled = true;
+                rb.IsChecked = (ViewModel.SelectedFastbootDevice == dev);
+            }
+            else
+            {
+                rb.Content = "Device Not Found";
+                rb.IsEnabled = false;
+                rb.IsChecked = false;
+            }
+            return rb;
+        }
+
+        public RadioButton ADBFirstDevice => GetAdbDeviceRadioButton(0);
+        public RadioButton ADBSecondDevice => GetAdbDeviceRadioButton(1);
+        public RadioButton ADBThirdDevice => GetAdbDeviceRadioButton(2);
+        public RadioButton ADBFourthDevice => GetAdbDeviceRadioButton(3);
+        public RadioButton ADBFifthDevice => GetAdbDeviceRadioButton(4);
+
+        public RadioButton FastbootFirstDevice => GetFastbootDeviceRadioButton(0);
+        public RadioButton FastbootSecondDevice => GetFastbootDeviceRadioButton(1);
+        public RadioButton FastbootThirdDevice => GetFastbootDeviceRadioButton(2);
+        public RadioButton FastbootFourthDevice => GetFastbootDeviceRadioButton(3);
+        public RadioButton FastbootFifthDevice => GetFastbootDeviceRadioButton(4);
+
         public MainWindow()
         {
+            _adbService = new Services.AdbService(adbpath);
+            _fastbootService = new Services.FastbootService(adbpath);
+            ViewModel = new ViewModels.MainViewModel(_adbService, _fastbootService);
+            DataContext = ViewModel;
+
             InitializeComponent();
-            LoadDevices();
-            LoadFastbootDevices();
+
+            Task.Run(async () => await ViewModel.RefreshDevicesAsync());
 
             ThemeManagerHelper.ThemeChanged += OnThemeChanged;
 
@@ -135,8 +195,34 @@ namespace ADBFastbootGUI
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
             SaveSettings();
-            Application.Current.Shutdown();
+            KillBackgroundProcesses();
+            base.OnClosing(e);
+            Environment.Exit(0);
+        }
+
+        private void KillBackgroundProcesses()
+        {
+            string[] processesToKill = { "adb", "fastboot", "scrcpy" };
+            foreach (var processName in processesToKill)
+            {
+                try
+                {
+                    foreach (var proc in Process.GetProcessesByName(processName))
+                    {
+                        proc.Kill();
+                    }
+                }
+                catch
+                {
+                    // Ignore exceptions to remain robust
+                }
+            }
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
@@ -155,199 +241,27 @@ namespace ADBFastbootGUI
 
         public string GetSelectedAdbDevice()
         {
-            if (ADBFirstDevice.IsChecked == true && ADBFirstDevice.Content.ToString() != "Device Not Found")
-                return ADBFirstDevice.Content.ToString();
-            if (ADBSecondDevice.IsChecked == true && ADBSecondDevice.Content.ToString() != "Device Not Found")
-                return ADBSecondDevice.Content.ToString();
-            if (ADBThirdDevice.IsChecked == true && ADBThirdDevice.Content.ToString() != "Device Not Found")
-                return ADBThirdDevice.Content.ToString();
-            if (ADBFourthDevice.IsChecked == true && ADBFourthDevice.Content.ToString() != "Device Not Found")
-                return ADBFourthDevice.Content.ToString();
-            if (ADBFifthDevice.IsChecked == true && ADBFifthDevice.Content.ToString() != "Device Not Found")
-                return ADBFifthDevice.Content.ToString();
-            return null;
+            return ViewModel?.SelectedAdbDevice;
         }
 
         public string GetSelectedFastbootDevice()
         {
-            if (FastbootFirstDevice.IsChecked == true && FastbootFirstDevice.Content.ToString() != "Device Not Found")
-                return FastbootFirstDevice.Content.ToString();
-            if (FastbootSecondDevice.IsChecked == true && FastbootSecondDevice.Content.ToString() != "Device Not Found")
-                return FastbootSecondDevice.Content.ToString();
-            if (FastbootThirdDevice.IsChecked == true && FastbootThirdDevice.Content.ToString() != "Device Not Found")
-                return FastbootThirdDevice.Content.ToString();
-            if (FastbootFourthDevice.IsChecked == true && FastbootFourthDevice.Content.ToString() != "Device Not Found")
-                return FastbootFourthDevice.Content.ToString();
-            if (FastbootFifthDevice.IsChecked == true && FastbootFifthDevice.Content.ToString() != "Device Not Found")
-                return FastbootFifthDevice.Content.ToString();
-            return null;
+            return ViewModel?.SelectedFastbootDevice;
         }
 
         public void LoadDevices()
         {
-            string[] lines;
-
-            try
+            if (ViewModel != null)
             {
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    Arguments = "/C adb devices",
-                    WorkingDirectory = adbpath,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using (Process process = Process.Start(psi))
-                {
-                    string output = process.StandardOutput.ReadToEnd();
-                    process.WaitForExit();
-                    lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                }
-
-                string[] deviceIds = lines.Length > 1
-                    ? lines.Skip(1)
-                        .Where(line => line.Contains("device"))
-                        .Select(line => line.Split('\t')[0])
-                        .ToArray()
-                    : new string[0];
-
-                ADBFirstDevice.Content = deviceIds.Length > 0 ? deviceIds[0] : "Device Not Found";
-                ADBSecondDevice.Content = deviceIds.Length > 1 ? deviceIds[1] : "Device Not Found";
-                ADBThirdDevice.Content = deviceIds.Length > 2 ? deviceIds[2] : "Device Not Found";
-                ADBFourthDevice.Content = deviceIds.Length > 3 ? deviceIds[3] : "Device Not Found";
-                ADBFifthDevice.Content = deviceIds.Length > 4 ? deviceIds[4] : "Device Not Found";
-
-                if (deviceIds.Length == 1)
-                {
-                    ADBFirstDevice.IsEnabled = false;
-                    ADBSecondDevice.IsEnabled = false;
-                    ADBThirdDevice.IsEnabled = false;
-                    ADBFourthDevice.IsEnabled = false;
-                    ADBFifthDevice.IsEnabled = false;
-                    ADBFirstDevice.IsChecked = true;
-                }
-                else if (deviceIds.Length == 2)
-                {
-                    ADBFirstDevice.IsEnabled = true;
-                    ADBSecondDevice.IsEnabled = true;
-                    ADBThirdDevice.IsEnabled = false;
-                    ADBFourthDevice.IsEnabled = false;
-                    ADBFifthDevice.IsEnabled = false;
-                }
-                else if (deviceIds.Length == 3)
-                {
-                    ADBFirstDevice.IsEnabled = true;
-                    ADBSecondDevice.IsEnabled = true;
-                    ADBThirdDevice.IsEnabled = true;
-                    ADBFourthDevice.IsEnabled = false;
-                    ADBFifthDevice.IsEnabled = false;
-                }
-                else if (deviceIds.Length == 4)
-                {
-                    ADBFirstDevice.IsEnabled = true;
-                    ADBSecondDevice.IsEnabled = true;
-                    ADBThirdDevice.IsEnabled = true;
-                    ADBFourthDevice.IsEnabled = true;
-                    ADBFifthDevice.IsEnabled = false;
-                }
-                else if (deviceIds.Length == 0)
-                {
-                    ADBFirstDevice.IsEnabled = false;
-                    ADBSecondDevice.IsEnabled = false;
-                    ADBThirdDevice.IsEnabled = false;
-                    ADBFourthDevice.IsEnabled = false;
-                    ADBFifthDevice.IsEnabled = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                DialogBox.Show("Error: " + ex.Message);
+                Task.Run(async () => await ViewModel.RefreshDevicesAsync());
             }
         }
 
         public void LoadFastbootDevices()
         {
-            string[] lines;
-
-            try
+            if (ViewModel != null)
             {
-                ProcessStartInfo psi = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    Arguments = "/C fastboot devices",
-                    WorkingDirectory = adbpath,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using (Process process = Process.Start(psi))
-                {
-                    string output = process.StandardOutput.ReadToEnd();
-                    process.WaitForExit();
-                    lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                }
-
-                string[] deviceIds = lines.Length > 0
-                    ? lines
-                        .Where(line => line.Contains("fastboot"))
-                        .Select(line => line.Split('\t')[0])
-                        .ToArray()
-                    : new string[0];
-
-                FastbootFirstDevice.Content = deviceIds.Length > 0 ? deviceIds[0] : "Device Not Found";
-                FastbootSecondDevice.Content = deviceIds.Length > 1 ? deviceIds[1] : "Device Not Found";
-                FastbootThirdDevice.Content = deviceIds.Length > 2 ? deviceIds[2] : "Device Not Found";
-                FastbootFourthDevice.Content = deviceIds.Length > 3 ? deviceIds[3] : "Device Not Found";
-                FastbootFifthDevice.Content = deviceIds.Length > 4 ? deviceIds[4] : "Device Not Found";
-
-                if (deviceIds.Length == 1)
-                {
-                    FastbootFirstDevice.IsEnabled = true;
-                    FastbootSecondDevice.IsEnabled = false;
-                    FastbootThirdDevice.IsEnabled = false;
-                    FastbootFourthDevice.IsEnabled = false;
-                    FastbootFifthDevice.IsEnabled = false;
-                    FastbootFirstDevice.IsChecked = true;
-                }
-                else if (deviceIds.Length == 2)
-                {
-                    FastbootFirstDevice.IsEnabled = true;
-                    FastbootSecondDevice.IsEnabled = true;
-                    FastbootThirdDevice.IsEnabled = false;
-                    FastbootFourthDevice.IsEnabled = false;
-                    FastbootFifthDevice.IsEnabled = false;
-                }
-                else if (deviceIds.Length == 3)
-                {
-                    FastbootFirstDevice.IsEnabled = true;
-                    FastbootSecondDevice.IsEnabled = true;
-                    FastbootThirdDevice.IsEnabled = true;
-                    FastbootFourthDevice.IsEnabled = false;
-                    FastbootFifthDevice.IsEnabled = false;
-                }
-                else if (deviceIds.Length == 4)
-                {
-                    FastbootFirstDevice.IsEnabled = true;
-                    FastbootSecondDevice.IsEnabled = true;
-                    FastbootThirdDevice.IsEnabled = true;
-                    FastbootFourthDevice.IsEnabled = true;
-                    FastbootFifthDevice.IsEnabled = false;
-                }
-                else if (deviceIds.Length == 0)
-                {
-                    FastbootFirstDevice.IsEnabled = false;
-                    FastbootSecondDevice.IsEnabled = false;
-                    FastbootThirdDevice.IsEnabled = false;
-                    FastbootFourthDevice.IsEnabled = false;
-                    FastbootFifthDevice.IsEnabled = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                DialogBox.Show("Error: " + ex.Message);
+                Task.Run(async () => await ViewModel.RefreshDevicesAsync());
             }
         }
 
@@ -2156,6 +2070,14 @@ namespace ADBFastbootGUI
 
         private void FastbootCreatePartitionButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show(
+                "WARNING: This feature is UNTESTED and could potentially brick your device if used incorrectly! Are you sure you want to proceed?",
+                "Untested Operation Warning",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) return;
+
             CreateLogicalPartitionWindow wnd = new CreateLogicalPartitionWindow(this);
             Opacity = 0.4;
             wnd.ShowDialog();
@@ -2164,6 +2086,14 @@ namespace ADBFastbootGUI
 
         private void FastbootErasePartitionButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show(
+                "WARNING: This feature is UNTESTED and could potentially brick your device if used incorrectly! Are you sure you want to proceed?",
+                "Untested Operation Warning",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) return;
+
             EraseLogicalPartitionWindow wnd = new EraseLogicalPartitionWindow(this);
             Opacity = 0.4;
             wnd.ShowDialog();
@@ -2172,6 +2102,14 @@ namespace ADBFastbootGUI
 
         private void FastbootResizePartitionButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show(
+                "WARNING: This feature is UNTESTED and could potentially brick your device if used incorrectly! Are you sure you want to proceed?",
+                "Untested Operation Warning",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) return;
+
             ResizeLogicalPartitionWindow wnd = new ResizeLogicalPartitionWindow(this);
             Opacity = 0.4;
             wnd.ShowDialog();
