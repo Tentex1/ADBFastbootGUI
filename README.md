@@ -88,7 +88,7 @@ nuget restore ADBFastbootGUI.sln
 
 ## 📷 Screenshot
 
-> ![UI Screenshot](./screenshot.png)
+> ![UI Screenshot](screenshot.png)
 
 ---
 
