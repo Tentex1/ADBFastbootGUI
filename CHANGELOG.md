@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [2.0.4] - 2026-05-18
+## [2.0.0] - 2026-05-18
 
 This is a major release featuring a robust architectural overhaul, dynamic UI enhancements, performance optimizations, and critical bug fixes. The application has been fully modernized into a highly responsive, asynchronous MVVM desktop application.
 
