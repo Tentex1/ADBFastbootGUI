@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADB & Fastboot GUI - Seamless Android Management</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="A simple, user-friendly, and powerful desktop graphical interface for ADB and Fastboot operations. Manage your Android device without needing the command line.">
+    <meta name="keywords"
+        content="adb, fastboot, android debugging, bootloader flash, android gui, scrcpy mirroring, android shell, open source">
+    <meta name="author" content="Tentex1">
+
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="ADB & Fastboot GUI - Manage Android Easily">
+    <meta property="og:description"
+        content="Official home of the ADB & Fastboot GUI. A modern desktop application to flash, reboot, mirror screens, install apps, and run commands.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Tentex1/ADBFastbootGUI/master/screenshot.png">
+    <meta property="og:url" content="https://tentex1.github.io/ADBFastbootGUI/">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
+
+    <!-- External Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Grid Visual Overlay -->
+    <div class="body-grid-overlay"></div>
+
+    <!-- Fixed Header -->
+    <header id="site-header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-cubes"></i>
+                <span>ADB & Fastboot GUI</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#overview" class="nav-link">Overview</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#guide" class="nav-link">Connection Guide</a></li>
+                    <li><a href="#timeline" class="nav-link">Releases</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Theme Switcher -->
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme" title="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <!-- GitHub Star Link -->
+                <a href="https://github.com/Tentex1/ADBFastbootGUI" target="_blank" class="icon-btn"
+                    aria-label="Star on GitHub" title="Star on GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <!-- Donate -->
+                <a href="https://buymeacoffee.com/duranforreal" target="_blank" class="btn-premium">
+                    <i class="fas fa-heart"></i>
+                    <span>Donate</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero & Web-App Mockup Simulator Section -->
+        <section id="overview" class="container">
+            <div class="hero-grid">
+
+                <!-- Hero Copywriting -->
+                <div class="hero-content reveal-element">
+                    <span class="section-tag">Open Source Windows Desktop Utility</span>
+                    <h1>Take Control of Your <span class="gradient-text">Android Device</span></h1>
+                    <p>A simple, sleek, and premium graphical interface for ADB (Android Debug Bridge) and Fastboot
+                        operations. Flash partitions, uninstall apps, mirror screen, and push files effortlessly without
+                        touching the command line.</p>
+
+                    <div class="hero-ctas">
+                        <a href="https://github.com/Tentex1/ADBFastbootGUI/releases" target="_blank"
+                            class="btn btn-primary">
+                            <i class="fab fa-windows"></i>
+                            <span>Download for Windows</span>
+                        </a>
+                        <a href="#guide" class="btn btn-secondary">
+                            <i class="fas fa-book"></i>
+                            <span>Connection Guide</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Desktop GUI Simulator -->
+                <div class="hero-visual reveal-element reveal-delay-2">
+                    <div class="app-simulator">
+
+                        <!-- Top Window Frame Header (Windows 11 Fluent Style) -->
+                        <div class="app-header">
+                            <button class="app-about-menu" id="sim-about-menu">ADB and Fastboot GUI</button>
+                            <div class="app-title-middle">
+                                <div class="device-status-capsule" id="sim-status-capsule"
+                                    title="Click to trigger asynchronous refresh of active device model details">
+                                    <span class="status-dot pulsate"></span>
+                                    <span id="sim-status-capsule-text">Pixel 8 Pro (Active)</span>
+                                </div>
+                            </div>
+                            <div class="window-controls-wpf">
+                                <button class="wpf-win-btn" id="sim-btn-settings" title="Settings"><i
+                                        class="fas fa-cog"></i></button>
+                                <button class="wpf-win-btn" id="sim-btn-minimize" title="Minimize"><i
+                                        class="fas fa-minus"></i></button>
+                                <button class="wpf-win-btn wpf-close-btn" id="sim-btn-close" title="Close"><i
+                                        class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Main Inner Tabbed WPF Window Body -->
+                        <div class="app-body-wpf">
+
+                            <!-- WPF Tab Header Bar (Cleaned from WPF underscores access keys) -->
+                            <div class="wpf-tab-header">
+                                <button class="wpf-tab-btn active" data-tab="quick">Quick Processes</button>
+                                <button class="wpf-tab-btn" data-tab="adb">ADB</button>
+                                <button class="wpf-tab-btn" data-tab="fastboot">Fastboot</button>
+                                <button class="wpf-tab-btn" data-tab="advanced">Fastboot (Advanced)</button>
+                                <button class="wpf-tab-btn" data-tab="scrcpy">Scrcpy</button>
+                                <button class="wpf-tab-btn" data-tab="devices">Devices</button>
+                            </div>
+
+                            <!-- Tab Contents Wrapper -->
+                            <div class="wpf-tab-container">
+
+                                <!-- Tab 1: Quick Processes -->
+                                <div id="sim-tab-quick" class="wpf-tab-content active">
+                                    <div class="wpf-layout-grid">
+                                        <!-- Group 1: Connection -->
+                                        <fieldset class="wpf-groupbox connection-group">
+                                            <legend>Connection</legend>
+                                            <button class="wpf-btn wpf-btn-accent"
+                                                id="sim-btn-wireless-connect">Wireless Connection</button>
+                                        </fieldset>
+
+                                        <!-- Group 2: ADB -->
+                                        <fieldset class="wpf-groupbox adb-group">
+                                            <legend>ADB</legend>
+                                            <div class="wpf-groupbox-content">
+                                                <div class="wpf-sub-section">
+                                                    <span class="wpf-sub-title">Server Processes</span>
+                                                    <div class="wpf-row">
+                                                        <button class="wpf-btn" data-action="start-server">Start
+                                                            Server</button>
+                                                        <button class="wpf-btn wpf-btn-danger"
+                                                            data-action="kill-server">Kill Server</button>
+                                                    </div>
+                                                </div>
+                                                <hr class="wpf-divider">
+                                                <div class="wpf-sub-section">
+                                                    <span class="wpf-sub-title">Rebooting Processes</span>
+                                                    <div class="wpf-row">
+                                                        <button class="wpf-btn"
+                                                            data-action="reboot-recovery">Recovery</button>
+                                                        <button class="wpf-btn"
+                                                            data-action="reboot-system">System</button>
+                                                        <button class="wpf-btn"
+                                                            data-action="reboot-bootloader">Bootloader</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Group 3: Fastboot -->
+                                        <fieldset class="wpf-groupbox fastboot-group">
+                                            <legend>Fastboot</legend>
+                                            <div class="wpf-groupbox-content">
+                                                <div class="wpf-sub-section">
+                                                    <span class="wpf-sub-title">Locking Processes</span>
+                                                    <div class="wpf-row">
+                                                        <button class="wpf-btn" data-action="oem-lock">Lock</button>
+                                                        <button class="wpf-btn" data-action="oem-unlock">Unlock</button>
+                                                    </div>
+                                                </div>
+                                                <hr class="wpf-divider">
+                                                <div class="wpf-sub-section">
+                                                    <span class="wpf-sub-title">Rebooting Processes</span>
+                                                    <div class="wpf-row">
+                                                        <button class="wpf-btn"
+                                                            data-action="reboot-recovery-fb">Recovery</button>
+                                                        <button class="wpf-btn"
+                                                            data-action="reboot-system-fb">System</button>
+                                                        <button class="wpf-btn"
+                                                            data-action="reboot-bootloader-fb">Bootloader</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Group 4: Scrcpy -->
+                                        <fieldset class="wpf-groupbox scrcpy-group">
+                                            <legend>Scrcpy</legend>
+                                            <div class="wpf-column">
+                                                <button class="wpf-btn wpf-btn-accent" id="sim-btn-toggle-mirror"><i
+                                                        class="fas fa-desktop"></i> Start Screen Mirroring</button>
+                                                <button class="wpf-btn" id="sim-btn-toggle-record"><i
+                                                        class="fas fa-video"></i> Start Screen Recording</button>
+                                                <button class="wpf-btn" id="sim-btn-toggle-otg"><i
+                                                        class="fas fa-keyboard"></i> Start OTG</button>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 2: ADB -->
+                                <div id="sim-tab-adb" class="wpf-tab-content">
+                                    <div class="wpf-layout-grid-adb">
+                                        <!-- Left Side Controls -->
+                                        <div class="wpf-adb-left-panel">
+                                            <!-- Group 1: Reboot -->
+                                            <fieldset class="wpf-groupbox">
+                                                <legend>Reboot (ADB)</legend>
+                                                <div class="wpf-row">
+                                                    <button class="wpf-btn"
+                                                        data-action="reboot-recovery">Recovery</button>
+                                                    <button class="wpf-btn" data-action="reboot-system">System</button>
+                                                    <button class="wpf-btn"
+                                                        data-action="reboot-bootloader">Bootloader</button>
+                                                </div>
+                                            </fieldset>
+
+                                            <!-- Group 2: Apps -->
+                                            <fieldset class="wpf-groupbox">
+                                                <legend>Apps</legend>
+                                                <div class="wpf-row">
+                                                    <button class="wpf-btn" id="sim-btn-app-install">Install</button>
+                                                    <button class="wpf-btn wpf-btn-danger"
+                                                        id="sim-btn-app-uninstall">Uninstall</button>
+                                                    <button class="wpf-btn" id="sim-btn-app-list">List</button>
+                                                </div>
+                                            </fieldset>
+
+                                            <!-- Group 3: Files -->
+                                            <fieldset class="wpf-groupbox">
+                                                <legend>Files</legend>
+                                                <div class="wpf-row">
+                                                    <button class="wpf-btn" id="sim-btn-send-file">Send File</button>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+
+                                        <!-- Right Side "Various" Buttons Panel -->
+                                        <div class="wpf-adb-right-panel">
+                                            <span class="wpf-various-title">Various</span>
+                                            <div class="wpf-column">
+                                                <button class="wpf-btn wpf-btn-accent wpf-btn-large"
+                                                    data-action="adb-shell">Shell</button>
+                                                <button class="wpf-btn wpf-btn-large"
+                                                    id="sim-btn-realtime-log">Real-Time Log</button>
+                                                <button class="wpf-btn wpf-btn-large" id="sim-btn-get-device-info">Get
+                                                    Device Info</button>
+                                                <button class="wpf-btn wpf-btn-large"
+                                                    data-action="sideload">Sideload</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 3: Fastboot -->
+                                <div id="sim-tab-fastboot" class="wpf-tab-content">
+                                    <!-- Top Options Panel -->
+                                    <div class="wpf-fastboot-options">
+                                        <label class="wpf-checkbox"><input type="checkbox" id="sim-opt-reboot" checked>
+                                            If flashing or erasing ends, reboot immediately.</label>
+                                        <label class="wpf-checkbox"><input type="checkbox" id="sim-opt-verity"> Disable
+                                            Verity (vbmeta only)</label>
+                                        <label class="wpf-checkbox"><input type="checkbox" id="sim-opt-verification">
+                                            Disable Verification (vbmeta only)</label>
+                                    </div>
+
+                                    <div class="wpf-layout-grid-fastboot">
+                                        <!-- Reboot group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Reboot (Fastboot)</legend>
+                                            <div class="wpf-row">
+                                                <button class="wpf-btn"
+                                                    data-action="reboot-recovery-fb">Recovery</button>
+                                                <button class="wpf-btn" data-action="reboot-system-fb">System</button>
+                                                <button class="wpf-btn"
+                                                    data-action="reboot-bootloader-fb">Bootloader</button>
+                                                <button class="wpf-btn" data-action="reboot-image-fb">Image</button>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- OEM Locking & Info group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>OEM Locking &amp; Info</legend>
+                                            <div class="wpf-row">
+                                                <button class="wpf-btn" data-action="oem-unlock">Unlock</button>
+                                                <button class="wpf-btn" data-action="oem-lock">Lock</button>
+                                                <button class="wpf-btn" data-action="oem-info">Info</button>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Flash Partition group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Flash Partition</legend>
+                                            <div class="wpf-row wpf-flex-wrap">
+                                                <button class="wpf-btn wpf-btn-flash"
+                                                    data-flash="Recovery">Recovery</button>
+                                                <button class="wpf-btn wpf-btn-flash" data-flash="Boot">Boot</button>
+                                                <button class="wpf-btn wpf-btn-flash"
+                                                    data-flash="System">System</button>
+                                                <button class="wpf-btn wpf-btn-flash"
+                                                    data-flash="Vendor">Vendor</button>
+                                                <button class="wpf-btn wpf-btn-flash"
+                                                    data-flash="vbmeta">vbmeta</button>
+                                                <button class="wpf-btn wpf-btn-flash" data-flash="dtbo">dtbo</button>
+                                                <button class="wpf-btn wpf-btn-flash"
+                                                    data-flash="userdata">userdata</button>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Erase Partition group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Erase Partition</legend>
+                                            <div class="wpf-row wpf-flex-wrap">
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="Recovery">Recovery</button>
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="Boot">Boot</button>
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="System">System</button>
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="Vendor">Vendor</button>
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="vbmeta">vbmeta</button>
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="dtbo">dtbo</button>
+                                                <button class="wpf-btn wpf-btn-danger wpf-btn-erase"
+                                                    data-erase="userdata">userdata</button>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 4: Fastboot (Advanced) -->
+                                <div id="sim-tab-advanced" class="wpf-tab-content">
+                                    <div class="wpf-layout-grid-advanced">
+                                        <!-- Group 1: DSU Loader -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>GSI Flashing (DSU Loader / UNTESTED)</legend>
+                                            <div class="wpf-row">
+                                                <button class="wpf-btn" id="sim-btn-dsu-enable">DSU Loader
+                                                    enable</button>
+                                                <button class="wpf-btn" id="sim-btn-dsu-disable">DSU Loader
+                                                    disable</button>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Group 2: Logical Partitions -->
+                                        <fieldset class="wpf-groupbox" style="margin-top: 1rem;">
+                                            <legend>Partition Management (UNTESTED)</legend>
+                                            <div class="wpf-row">
+                                                <button class="wpf-btn" id="sim-btn-part-create">Create Logical
+                                                    Partition</button>
+                                                <button class="wpf-btn wpf-btn-danger" id="sim-btn-part-erase">Erase
+                                                    Logical Partition</button>
+                                                <button class="wpf-btn" id="sim-btn-part-resize">Resize Logical
+                                                    Partition</button>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 5: Scrcpy -->
+                                <div id="sim-tab-scrcpy" class="wpf-tab-content">
+                                    <div class="wpf-layout-grid-scrcpy">
+                                        <!-- Screen Recording group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Screen Recording</legend>
+                                            <div class="wpf-column wpf-align-center">
+                                                <span class="wpf-label">Select Recording Output</span>
+                                                <select class="wpf-combo" id="sim-combo-record-format">
+                                                    <option>.mp4</option>
+                                                    <option>.mkv</option>
+                                                </select>
+                                                <label class="wpf-checkbox"><input type="checkbox" checked
+                                                        id="sim-rec-audio"> Audio (Android 11)</label>
+                                                <label class="wpf-checkbox"><input type="checkbox" checked
+                                                        id="sim-rec-video"> Video (Android 6.1)</label>
+                                                <button class="wpf-btn wpf-btn-large" id="sim-btn-start-record">Start
+                                                    Recording</button>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Mirroring group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Mirroring</legend>
+                                            <div class="wpf-column wpf-align-center">
+                                                <span class="wpf-label">Select Mirror Item</span>
+                                                <select class="wpf-combo" id="sim-combo-mirror-item">
+                                                    <option>Screen</option>
+                                                    <option>Camera:Front</option>
+                                                    <option>Camera:Back</option>
+                                                    <option>Camera:External</option>
+                                                </select>
+                                                <label class="wpf-checkbox"><input type="checkbox" checked
+                                                        id="sim-mir-audio"> Audio (Android 11)</label>
+                                                <button class="wpf-btn wpf-btn-large wpf-btn-accent"
+                                                    id="sim-btn-start-mirror">Start Mirroring</button>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Config group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Config</legend>
+                                            <div class="wpf-row wpf-space-between wpf-align-center" style="gap: 1.5rem">
+                                                <div class="wpf-column">
+                                                    <span class="wpf-label">FPS</span>
+                                                    <input type="text" class="wpf-textbox" value="60" id="sim-cfg-fps">
+                                                </div>
+                                                <div class="wpf-column">
+                                                    <span class="wpf-label">Video Codec</span>
+                                                    <select class="wpf-combo" id="sim-cfg-codec">
+                                                        <option>h264</option>
+                                                        <option>h265</option>
+                                                        <option>av1</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- OTG group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>OTG</legend>
+                                            <div class="wpf-column wpf-align-center">
+                                                <select class="wpf-combo" id="sim-combo-otg-opt">
+                                                    <option>Keyboard + Mouse</option>
+                                                    <option>Gamepad</option>
+                                                </select>
+                                                <button class="wpf-btn wpf-btn-large" id="sim-btn-start-otg">Start
+                                                    OTG</button>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 6: Devices -->
+                                <div id="sim-tab-devices" class="wpf-tab-content">
+                                    <div class="wpf-search-wrapper">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" class="wpf-search-input" id="sim-device-search"
+                                            placeholder="Search active devices...">
+                                    </div>
+                                    <div class="wpf-layout-grid-devices">
+                                        <!-- ADB Devices group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>ADB Devices (Unlimited Filters)</legend>
+                                            <div class="wpf-column wpf-device-list" id="sim-adb-device-list">
+                                                <label class="wpf-radio" data-device-name="Pixel 8 Pro"
+                                                    data-device-serial="987654321A88X"><input type="radio"
+                                                        name="adb-devices" checked> <span
+                                                        class="wpf-device-serial">987654321A88X</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                                <label class="wpf-radio" data-device-name="Galaxy S24 Ultra"
+                                                    data-device-serial="S24ULTRA999XX"><input type="radio"
+                                                        name="adb-devices"> <span
+                                                        class="wpf-device-serial">S24ULTRA999XX</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                                <label class="wpf-radio" data-device-name="Nothing Phone (2)"
+                                                    data-device-serial="NOTHING2ND007"><input type="radio"
+                                                        name="adb-devices"> <span
+                                                        class="wpf-device-serial">NOTHING2ND007</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                                <label class="wpf-radio" data-device-name="Pixel 7a"
+                                                    data-device-serial="US628462002A7"><input type="radio"
+                                                        name="adb-devices"> <span
+                                                        class="wpf-device-serial">US628462002A7</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                                <label class="wpf-radio" data-device-name="OnePlus 12 Pro"
+                                                    data-device-serial="OP12PRO8888AA"><input type="radio"
+                                                        name="adb-devices"> <span
+                                                        class="wpf-device-serial">OP12PRO8888AA</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                                <label class="wpf-radio" data-device-name="Xiaomi Redmi K70"
+                                                    data-device-serial="REDMIK70ULTRA"><input type="radio"
+                                                        name="adb-devices"> <span
+                                                        class="wpf-device-serial">REDMIK70ULTRA</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                                <label class="wpf-radio" data-device-name="Moto G Play 2025"
+                                                    data-device-serial="MOTOGPLAY2025"><input type="radio"
+                                                        name="adb-devices"> <span
+                                                        class="wpf-device-serial">MOTOGPLAY2025</span> <span
+                                                        class="wpf-device-status-lbl">device</span></label>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Fastboot Devices group -->
+                                        <fieldset class="wpf-groupbox">
+                                            <legend>Fastboot Devices</legend>
+                                            <div class="wpf-column wpf-device-list" id="sim-fb-device-list">
+                                                <label class="wpf-radio" data-device-name="Pixel 8 Pro"
+                                                    data-device-serial="FASTBOOT123PX"><input type="radio"
+                                                        name="fb-devices" checked> <span
+                                                        class="wpf-device-serial">FASTBOOT123PX</span> <span
+                                                        class="wpf-device-status-lbl">fastboot</span></label>
+                                                <label class="wpf-radio" data-device-name="Galaxy S24 Ultra"
+                                                    data-device-serial="FBT-S24ULTRA9"><input type="radio"
+                                                        name="fb-devices"> <span
+                                                        class="wpf-device-serial">FBT-S24ULTRA9</span> <span
+                                                        class="wpf-device-status-lbl">fastboot</span></label>
+                                                <label class="wpf-radio" data-device-name="Nothing Phone (2)"
+                                                    data-device-serial="FBT-NOTHING2N"><input type="radio"
+                                                        name="fb-devices"> <span
+                                                        class="wpf-device-serial">FBT-NOTHING2N</span> <span
+                                                        class="wpf-device-status-lbl">fastboot</span></label>
+                                                <label class="wpf-radio" data-device-name="Pixel 7a"
+                                                    data-device-serial="FBT-PIXEL7AA7"><input type="radio"
+                                                        name="fb-devices"> <span
+                                                        class="wpf-device-serial">FBT-PIXEL7AA7</span> <span
+                                                        class="wpf-device-status-lbl">fastboot</span></label>
+                                                <label class="wpf-radio" data-device-name="OnePlus 12 Pro"
+                                                    data-device-serial="FBT-OP12PRO88"><input type="radio"
+                                                        name="fb-devices"> <span
+                                                        class="wpf-device-serial">FBT-OP12PRO88</span> <span
+                                                        class="wpf-device-status-lbl">fastboot</span></label>
+                                            </div>
+                                        </fieldset>
+
+                                        <!-- Connection (ADB) group -->
+                                        <fieldset class="wpf-groupbox connection-group-devices">
+                                            <legend>Connection (ADB)</legend>
+                                            <button class="wpf-btn wpf-btn-accent"
+                                                id="sim-btn-wireless-connect-dev">Wireless Connection</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Phone Representation & Shell Overlay Graphic Container -->
+                            <div class="wpf-visual-overlay" id="wpf-scrcpy-mirror-frame" style="display: none;">
+                                <div class="wpf-overlay-header">
+                                    <span>Scrcpy Projection Mirror Screen</span>
+                                    <button class="wpf-overlay-close-btn" id="sim-btn-close-scrcpy-overlay"><i
+                                            class="fas fa-times"></i></button>
+                                </div>
+                                <div class="wpf-overlay-body">
+                                    <!-- Physical Phone Graphic -->
+                                    <div class="phone-mockup" id="sim-phone-mockup">
+                                        <div class="phone-speaker"></div>
+                                        <div class="phone-screen">
+                                            <div class="phone-content">
+                                                <i class="fab fa-android"></i>
+                                                <div class="phone-status-text">DISCONNECTED</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- WPF Confirmation MessageBox Overlay -->
+                        <div class="wpf-modal-backdrop" id="sim-mb-backdrop">
+                            <div class="wpf-messagebox">
+                                <div class="wpf-mb-header">
+                                    <span style="font-weight: 700; font-size: 0.75rem;">Confirm Logical Gate
+                                        Operation</span>
+                                    <span style="opacity: 0.6; cursor: pointer; font-size: 1rem; line-height: 1;"
+                                        id="sim-mb-close-btn">&times;</span>
+                                </div>
+                                <div class="wpf-mb-body">
+                                    <i class="fas fa-exclamation-triangle wpf-mb-icon danger" id="sim-mb-icon"></i>
+                                    <div class="wpf-mb-text" id="sim-mb-text">
+                                        Are you sure you want to perform this dangerous operation? This will erase/flash
+                                        logical partition blocks.
+                                    </div>
+                                </div>
+                                <div class="wpf-mb-footer">
+                                    <button class="wpf-btn wpf-btn-accent" id="sim-mb-btn-yes"
+                                        style="min-width: 60px;">Yes</button>
+                                    <button class="wpf-btn" id="sim-mb-btn-no" style="min-width: 60px;">No</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Integrated Console Shell Footer Log pane (Simulates real ADB console outputs) -->
+                        <div class="sim-terminal-wpf">
+                            <div class="terminal-wpf-header">
+                                <span><i class="fas fa-terminal"></i> ADB/Fastboot Console Logs output</span>
+                                <span class="terminal-blinking-status" id="sim-device-status">MONITORING - Pixel 8
+                                    Connected</span>
+                            </div>
+                            <div class="sim-terminal" id="sim-terminal-screen">
+                                <div class="terminal-line"><span class="command">adb start-server</span></div>
+                                <div class="terminal-line"><span class="info">* daemon not running; starting now at
+                                        tcp:5037</span></div>
+                                <div class="terminal-line"><span class="info">* daemon started successfully</span></div>
+                                <div class="terminal-line"><span class="command">adb devices</span></div>
+                                <div class="terminal-line"><span class="info">List of devices attached</span></div>
+                                <div class="terminal-line"><span class="info">987654321A88X device</span></div>
+                                <div class="terminal-line"><span class="terminal-cursor"></span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Dynamic Statistics Metrics Section -->
+        <section class="footer-section" style="padding: 3rem 0; border-top: 1px solid var(--card-border);">
+            <div class="container">
+                <div class="metrics-row reveal-element">
+                    <div class="metric-card glass-card">
+                        <div class="metric-icon"><i class="fas fa-code-branch"></i></div>
+                        <div class="metric-number text-gradient">100%</div>
+                        <div class="metric-label">Open Source & Free</div>
+                    </div>
+                    <div class="metric-card glass-card">
+                        <div class="metric-icon"><i class="fab fa-windows"></i></div>
+                        <div class="metric-number text-gradient">Win</div>
+                        <div class="metric-label">Windows C# WPF Native</div>
+                    </div>
+                    <div class="metric-card glass-card">
+                        <div class="metric-icon"><i class="fas fa-file-contract"></i></div>
+                        <div class="metric-number text-gradient">MIT</div>
+                        <div class="metric-label">Permissive MIT License</div>
+                    </div>
+                    <div class="metric-card glass-card">
+                        <div class="metric-icon"><i class="fas fa-mouse-pointer"></i></div>
+                        <div class="metric-number text-gradient">1-Click</div>
+                        <div class="metric-label">No Command-Line Required</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modular Core Features Grids Section -->
+        <section id="features" class="container">
+            <div style="text-align: center; padding: 5rem;" class="reveal-element">
+                <span class="section-tag">Powerful Capabilities</span>
+                <h2 class="section-title">One Tool, Endless Possibilities</h2>
+                <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">Manage active android
+                    distributions or fastboot partition blocks smoothly via custom utility layouts.</p>
+            </div>
+
+            <div class="features-grid">
+
+                <!-- Card 1: ADB Core & MVVM -->
+                <div class="feature-card glass-card reveal-element">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>ADB Control & MVVM</h3>
+                    <p>Powered by a 100% Asynchronous background engine and robust MVVM architecture for non-blocking
+                        execution.</p>
+                    <ul class="feature-bullet-list">
+                        <li><i class="fas fa-check"></i> <span>⚡ 100% Async CLI Engine (60+ FPS UI)</span></li>
+                        <li><i class="fas fa-check"></i> <span>🏗️ Modern C# MVVM Separation of Concerns</span></li>
+                        <li><i class="fas fa-check"></i> <span>📦 Upgraded APK Installer & Packages Manager</span></li>
+                        <li><i class="fas fa-check"></i> <span>🔍 Unlimited Multi-Device Active Connection
+                                Filters</span></li>
+                        <li><i class="fas fa-check"></i> <span>📂 File explorer & Diagnostic Device Info</span></li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Fastboot & Partition Gates -->
+                <div class="feature-card glass-card reveal-element reveal-delay-1">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fastboot & Safe Gates</h3>
+                    <p>Make deep system level partitions changes with integrated safety measures to protect device
+                        health.</p>
+                    <ul class="feature-bullet-list">
+                        <li><i class="fas fa-check"></i> <span>🔒 Safe Logical Partitions gates warnings</span></li>
+                        <li><i class="fas fa-check"></i> <span>MessageBoxResult checks to prevent bricking</span></li>
+                        <li><i class="fas fa-check"></i> <span>Flash boot, recovery, system, vendor, vbmeta</span></li>
+                        <li><i class="fas fa-check"></i> <span>Wipe & Erase cached/system partitions securely</span>
+                        </li>
+                        <li><i class="fas fa-check"></i> <span>OEM Bootloader locking/unlocking capabilities</span></li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Scrcpy HD & Auto-Sweeper -->
+                <div class="feature-card glass-card reveal-element reveal-delay-2">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-display"></i>
+                    </div>
+                    <h3>Scrcpy HD & Auto-Sweeper</h3>
+                    <p>Project displays in high definition, choice of video/audio codecs, and process self-termination
+                        sweepers.</p>
+                    <ul class="feature-bullet-list">
+                        <li><i class="fas fa-check"></i> <span>📺 HD Mirroring with h264, h265, av1 Codecs</span></li>
+                        <li><i class="fas fa-check"></i> <span>🎙️ Video & Audio output controls & FPS sliders</span>
+                        </li>
+                        <li><i class="fas fa-check"></i> <span>🧹 Process Sweeper auto-cleanup on exit</span></li>
+                        <li><i class="fas fa-check"></i> <span>🎮 Keyboard + Mouse OTG relays built-in</span></li>
+                        <li><i class="fas fa-check"></i> <span>🎨 High-end custom visual accent themes support</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Tabbed Connection Guides -->
+        <section id="guide"
+            style="background: rgba(255,255,255, 0.01); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+            <div class="container guides-container">
+
+                <div style="text-align: center;" class="reveal-element">
+                    <span class="section-tag">Step-By-Step Guidelines</span>
+                    <h2 class="section-title">How To Connect Your Device</h2>
+                    <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">Follow these simple
+                        parameters to properly establish synchronization between your PC and Android hardware.</p>
+                </div>
+
+                <!-- Tabs Selector -->
+                <div class="guide-tabs reveal-element">
+                    <button class="guide-tab-btn active" data-guide="usb">
+                        <i class="fab fa-usb"></i> USB Connection
+                    </button>
+                    <button class="guide-tab-btn" data-guide="wireless">
+                        <i class="fas fa-wifi"></i> Wireless (Wi-Fi) Pairing
+                    </button>
+                </div>
+
+                <!-- Guide Panel 1: USB Connection -->
+                <div id="guide-usb" class="guide-content-panel active">
+                    <div class="steps-list">
+                        <div class="step-card glass-card reveal-element">
+                            <div class="step-number">1</div>
+                            <div class="step-details">
+                                <h4>Enable Developer Settings</h4>
+                                <p>On your Android phone, navigate to <strong>Settings &gt; About Phone</strong>. Locate
+                                    the <strong>Build Number</strong> row, and tap it repeatedly <strong>7
+                                        times</strong> until you see the banner <em>"You are now a developer!"</em>.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card glass-card reveal-element">
+                            <div class="step-number">2</div>
+                            <div class="step-details">
+                                <h4>Authorize USB Debugging</h4>
+                                <p>Go back to <strong>Settings &gt; System &gt; Developer Options</strong>. Scroll down
+                                    and switch on <strong>USB Debugging</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card glass-card reveal-element">
+                            <div class="step-number">3</div>
+                            <div class="step-details">
+                                <h4>PC Connection & Keys</h4>
+                                <p>Link the device via a USB cable to your PC. A prompt requesting authorization
+                                    permissions will populate on the screen. Select <strong>"Always allow from this
+                                        computer"</strong> and press <strong>OK</strong>.</p>
+                                <div class="tip-box">
+                                    <i class="fas fa-lightbulb"></i> <strong>Troubleshoot Tip:</strong> If the tool
+                                    states <code>device unauthorized</code>, unplug the cable, restart the ADB server
+                                    inside our app GUI, and replug the USB to prompt authorization once more.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guide Panel 2: Wireless Pairing -->
+                <div id="guide-wireless" class="guide-content-panel">
+                    <div class="steps-list">
+                        <div class="step-card glass-card">
+                            <div class="step-number">1</div>
+                            <div class="step-details">
+                                <h4>Enable Developer Tools & Wi-Fi</h4>
+                                <p>Follow steps 1 &amp; 2 from the USB guide. Ensure your PC and Android terminal are
+                                    hooked onto the <strong>same Wi-Fi network distribution</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-card glass-card">
+                            <div class="step-number">2</div>
+                            <div class="step-details">
+                                <h4>Wireless Debugging Page</h4>
+                                <p>Inside <strong>Developer Options</strong>, locate <strong>Wireless
+                                        Debugging</strong>. Tap on it and toggle it to enabled. Next, select
+                                    <strong>"Pair device with pairing code"</strong> to reveal the pairing IP, Port, and
+                                    a 6-digit pin code.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="step-card glass-card">
+                            <div class="step-number">3</div>
+                            <div class="step-details">
+                                <h4>Pair in ADBFastbootGUI</h4>
+                                <p>Tap the <strong>"Wireless Connection"</strong> button in our app, input the
+                                    <code>PAIRING IP & PORT</code> and the <code>PAIRING CODE</code> inside the prompt
+                                    dialog box, and click Connect.
+                                </p>
+                                <div class="tip-box">
+                                    <i class="fas fa-info-circle"></i> <strong>Initial Synch:</strong> If establishing
+                                    connection for the first time, check the secondary checkbox in the app form to cache
+                                    keys, making future wifi syncs automated.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Developer Corner / Terminal CLI Section -->
+        <section class="container">
+            <div class="hero-grid" style="padding: 5rem; align-items: center;">
+                <div class="hero-content reveal-element">
+                    <span class="section-tag">Developer Setup</span>
+                    <h2 class="section-title">Open Source & Hackable</h2>
+                    <p class="section-subtitle" style="margin-bottom: 2rem">Designed using native C# WPF and Material
+                        Design XAML. Interested in configuring features, fixing active logs, or compiling personal
+                        layouts? Feel free to pull, fork, or audit the project files.</p>
+
+                    <div class="terminal-mock">
+                        <div class="terminal-header">
+                            <div class="terminal-tab">
+                                <i class="fas fa-terminal"></i> Git Quickstart
+                            </div>
+                            <button id="btn-copy-cli" class="copy-btn">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="terminal-body">
+                            <pre><code id="cli-code-block"><span class="command-comment"># Clone the repository files</span>
+<span class="command-input">git clone https://github.com/Tentex1/ADBFastbootGUI.git</span>
+
+<span class="command-comment"># Open the directory</span>
+<span class="command-input">cd ADBFastbootGUI</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-element reveal-delay-2" style="text-align: center;">
+                    <i class="fab fa-git-alt"
+                        style="font-size: 15rem; color: rgba(240, 80, 50, 0.15); display: inline-block;"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Releases Vertical Timeline Section -->
+        <section id="timeline" style="border-top: 1px solid var(--card-border);">
+            <div class="container">
+                <div style="text-align: center;" class="reveal-element">
+                    <span class="section-tag">Release History</span>
+                    <h2 class="section-title">Changelog Roadmap</h2>
+                    <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">See our development
+                        milestones, features additions, and patch distributions over time.</p>
+                </div>
+
+                <div class="timeline">
+
+                    <!-- Release Item 1 (v2.0) -->
+                    <div class="timeline-item reveal-element">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-version text-gradient">Version 2.0 (Latest Release)</div>
+                            <span class="timeline-date">January 9, 2025</span>
+                            <ul class="timeline-features">
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>⚡ 100% Asynchronous &
+                                        Responsive Engine (Non-blocking background workers)</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>🏗️ Modern MVVM Architecture
+                                        backed by custom lightweight framework</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>📺 Scrcpy HD display screen
+                                        mirroring &amp; dynamic video/audio codecs</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>📦 Advanced APK Installer
+                                        &amp; packages system uninstaller</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>🔍 Unlimited Multi-Device
+                                        connection filters &amp; search</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>🟢 Center Titlebar Status
+                                        Capsule &amp; live model queries</span></li>
+                                <li class="patched"><i class="fas fa-wrench"></i> <span>🎨 Dark Mode UI &amp; premium
+                                        custom visual accent themes support</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>🔒 Safe logical partition
+                                        gates with warning confirmation gates</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>🧹 Auto-cleanup lingering
+                                        processes background sweeper on exit</span></li>
+                                <li class="fixed"><i class="fas fa-check-circle"></i> <span>Fixed bug causing APK crash
+                                        on older legacy Android APIs</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Release Item 2 (v1.0) -->
+                    <div class="timeline-item reveal-element">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-card glass-card">
+                            <div class="timeline-version">Version 1.0 (Initial Public Release)</div>
+                            <span class="timeline-date">November 7, 2025</span>
+                            <ul class="timeline-features">
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>Core graphical user interface
+                                        setup</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>Standard ADB controls (Shell,
+                                        File explorer)</span></li>
+                                <li class="added"><i class="fas fa-plus-circle"></i> <span>Fastboot erase and flash
+                                        binaries execution</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action Footer -->
+        <section
+            style="border-top: 1px solid var(--card-border); background: radial-gradient(circle at 50% 100%, rgba(var(--primary-rgb), 0.1) 0%, transparent 80%); padding: 6rem 0;">
+            <div class="container footer-cta reveal-element">
+                <h3>Ready to manage Android easily?</h3>
+                <p>Download the free, lightweight utility now and skip memory-heavy terminal lines.</p>
+                <div class="footer-cta-buttons">
+                    <a href="https://github.com/Tentex1/ADBFastbootGUI/releases" target="_blank"
+                        class="btn btn-primary">
+                        <i class="fab fa-windows"></i>
+                        <span>Download for Windows</span>
+                    </a>
+                    <a href="https://github.com/Tentex1/ADBFastbootGUI" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-github"></i>
+                        <span>Star on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Copyrights -->
+    <footer class="footer-section">
+        <div class="container">
+            <ul class="social-links">
+                <li><a href="https://github.com/Tentex1/ADBFastbootGUI" target="_blank" class="social-link"
+                        title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://buymeacoffee.com/duranforreal" target="_blank" class="social-link" title="Donate"
+                        aria-label="Donate"><i class="fas fa-heart"></i></a></li>
+            </ul>
+            <div class="footer-bottom">
+                <div>&copy; 2026 ADB & Fastboot GUI Project. Distributed under the MIT License.</div>
+                <div>Created by <a href="https://github.com/Tentex1" target="_blank"
+                        style="font-weight: 600;">Tentex1</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client-Side Animations & Interactivity scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

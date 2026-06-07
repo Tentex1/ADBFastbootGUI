@@ -1,0 +1,2311 @@
+/* ==========================================================================
+   ADB & Fastboot GUI - Premium Design System (style.css)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+
+/* --- Global Theme Variables & Colors --- */
+:root {
+    /* Color Schemes (Default Dark Mode) */
+    --bg-gradient: radial-gradient(circle at 50% 0%, #0d1324 0%, #030712 100%);
+    --bg-color: #030712;
+    --card-bg: rgba(11, 17, 34, 0.55);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --primary: #3b82f6;
+    --primary-rgb: 59, 130, 246;
+    --primary-glow: rgba(59, 130, 246, 0.3);
+    --secondary: #8b5cf6;
+    --secondary-rgb: 139, 92, 246;
+    --secondary-glow: rgba(139, 92, 246, 0.3);
+    --accent: #06b6d4;
+    --accent-glow: rgba(6, 182, 212, 0.25);
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --terminal-bg: #050811;
+    --shadow: rgba(0, 0, 0, 0.6);
+    --nav-bg: rgba(3, 7, 18, 0.75);
+
+    --font-heading: 'Outfit', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+    --bg-gradient: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #e2e8f0 100%);
+    --bg-color: #e2e8f0;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(15, 23, 42, 0.08);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --primary: #2563eb;
+    --primary-rgb: 37, 99, 235;
+    --primary-glow: rgba(37, 99, 235, 0.12);
+    --secondary: #7c3aed;
+    --secondary-rgb: 124, 58, 237;
+    --secondary-glow: rgba(124, 58, 237, 0.12);
+    --accent: #0891b2;
+    --accent-glow: rgba(8, 145, 178, 0.12);
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --terminal-bg: #0f172a;
+    --shadow: rgba(15, 23, 42, 0.08);
+    --nav-bg: rgba(241, 245, 249, 0.8);
+}
+
+/* --- Core Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-color);
+    background-image: var(--bg-gradient);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* --- Scrollbar Customization --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+/* --- Background Grid Overlay --- */
+.body-grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+[data-theme="light"] .body-grid-overlay {
+    background-image: linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+}
+
+/* --- Layout Containers --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+section {
+    padding: 6rem 0;
+}
+
+/* --- Typography & Accents --- */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="light"] .gradient-text {
+    background: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 50%, #0e7490 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-tag {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+    background: var(--primary-glow);
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    border: 1px solid rgba(var(--primary-rgb), 0.25);
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+}
+
+/* --- Premium Glass Cards --- */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: var(--transition);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--primary-rgb), 0.25);
+    box-shadow: 0 15px 35px rgba(var(--primary-rgb), 0.15);
+}
+
+/* --- Header / Navigation Bar --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
+}
+
+header.scrolled {
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.logo i {
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Icons & Theme Toggles */
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.icon-btn:hover {
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+.btn-premium {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.45);
+}
+
+/* Mobile Menu Toggle */
+.mobile-toggle {
+    display: none;
+}
+
+/* ==========================================================================
+   Hero Section & Interactive Desktop App Mockup
+   ========================================================================== */
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: #ffffff !important;
+    border: none;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.45);
+}
+
+.btn-secondary {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* --- Floating Web-App GUI Mockup Simulator --- */
+.hero-visual {
+    position: relative;
+    width: 100%;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* --- Floating Web-App GUI Mockup Simulator (WPF Fluent Reconstructed) --- */
+.hero-visual {
+    position: relative;
+    width: 100%;
+}
+
+.app-simulator {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    height: 520px;
+    backdrop-filter: blur(25px);
+    position: relative;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="light"] .app-simulator {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.15);
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+}
+
+/* WPF Title Bar */
+.app-header {
+    background: rgba(15, 15, 15, 0.95);
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.25rem 0 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
+}
+
+[data-theme="light"] .app-header {
+    background: #f3f4f6;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.app-about-menu {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.app-about-menu:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .app-about-menu:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.app-title-middle {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Centered status badge premium capsule */
+.device-status-capsule {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 0.25rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #10b981;
+    transition: var(--transition);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.05);
+}
+
+.device-status-capsule:hover {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.35);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.device-status-capsule.querying {
+    background: rgba(59, 130, 246, 0.08) !important;
+    border-color: rgba(59, 130, 246, 0.2) !important;
+    color: var(--primary) !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.05);
+}
+
+.device-status-capsule.disconnected {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+    color: var(--danger) !important;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.05);
+}
+
+.device-status-capsule.recovery {
+    background: rgba(245, 158, 11, 0.08) !important;
+    border-color: rgba(245, 158, 11, 0.2) !important;
+    color: var(--warning) !important;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.05);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+    display: inline-block;
+}
+
+.status-dot.pulsate {
+    animation: status-pulsate 1.5s infinite;
+}
+
+@keyframes status-pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0.6;
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+.device-status-capsule.querying .status-dot.pulsate {
+    animation: status-pulsate-blue 1.5s infinite;
+}
+
+@keyframes status-pulsate-blue {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0.6;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+.device-status-capsule.disconnected .status-dot.pulsate {
+    animation: status-pulsate-red 1.5s infinite;
+}
+
+@keyframes status-pulsate-red {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0.6;
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+.device-status-capsule.recovery .status-dot.pulsate {
+    animation: status-pulsate-orange 1.5s infinite;
+}
+
+@keyframes status-pulsate-orange {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0.6;
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    }
+}
+
+/* Upgraded Filter Search Bar for Devices */
+.wpf-search-wrapper {
+    position: relative;
+    margin-bottom: 0.6rem;
+    width: 100%;
+}
+
+.wpf-search-wrapper i {
+    position: absolute;
+    left: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.wpf-search-input {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    padding: 0.4rem 0.6rem 0.4rem 1.6rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    width: 100%;
+    transition: var(--transition);
+}
+
+[data-theme="light"] .wpf-search-input {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #0f172a;
+}
+
+.wpf-search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 6px var(--primary-glow);
+}
+
+/* WPF Confirmation MessageBox Dialog Modal */
+.wpf-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    backdrop-filter: blur(4px);
+    animation: fadeInModal 0.2s ease-out;
+}
+
+.wpf-messagebox {
+    width: 330px;
+    background: #18181b;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: scaleInModal 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+[data-theme="light"] .wpf-messagebox {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.wpf-mb-header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    user-select: none;
+}
+
+[data-theme="light"] .wpf-mb-header {
+    background: #f3f4f6;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.wpf-mb-body {
+    padding: 1.25rem 1rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+}
+
+.wpf-mb-icon {
+    font-size: 1.5rem;
+    color: var(--warning);
+    margin-top: -2px;
+}
+
+.wpf-mb-icon.danger {
+    color: var(--danger);
+}
+
+.wpf-mb-text {
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.wpf-mb-footer {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 0.6rem 0.85rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .wpf-mb-footer {
+    background: #f9fafb;
+    border-top-color: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Windows title bar control buttons */
+.window-controls-wpf {
+    display: flex;
+    height: 100%;
+}
+
+.wpf-win-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    width: 48px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.wpf-win-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .wpf-win-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.wpf-close-btn:hover {
+    background: #c42b1c !important;
+    color: #ffffff !important;
+}
+
+/* WPF Tab Control Headers (MaterialDesignFilledTabControl Style) */
+.app-body-wpf {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.wpf-tab-header {
+    display: flex;
+    background: rgba(25, 25, 25, 0.4);
+    border-bottom: 1px solid var(--card-border);
+    padding: 0 0.5rem;
+    gap: 0.25rem;
+    user-select: none;
+    overflow-x: auto;
+}
+
+[data-theme="light"] .wpf-tab-header {
+    background: #fafafa;
+}
+
+.wpf-tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.75rem 1.1rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.wpf-tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] .wpf-tab-btn:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.wpf-tab-btn.active {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.wpf-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px 3px 0 0;
+}
+
+/* WPF Tab Content Panels */
+.wpf-tab-container {
+    flex: 1;
+    padding: 0.85rem;
+    overflow-y: auto;
+    background: rgba(10, 10, 10, 0.15);
+}
+
+[data-theme="light"] .wpf-tab-container {
+    background: #ffffff;
+}
+
+.wpf-tab-content {
+    display: none;
+    height: 100%;
+}
+
+.wpf-tab-content.active {
+    display: flex;
+    flex-direction: column;
+    animation: fadeInWPF 0.3s ease-out;
+}
+
+@keyframes fadeInWPF {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* GroupBox (Fieldset & Legend WPF replicas) */
+.wpf-groupbox {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 1rem 0.85rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+[data-theme="light"] .wpf-groupbox {
+    border-color: rgba(0, 0, 0, 0.12);
+    background: rgba(0, 0, 0, 0.005);
+}
+
+.wpf-groupbox legend {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 0 0.5rem;
+    letter-spacing: 0.01em;
+}
+
+/* General WPF Form Elements */
+.wpf-groupbox-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.wpf-sub-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wpf-sub-title {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.wpf-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.wpf-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wpf-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.wpf-space-between {
+    justify-content: space-between;
+}
+
+.wpf-align-center {
+    align-items: center;
+}
+
+.wpf-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.25rem 0;
+}
+
+[data-theme="light"] .wpf-divider {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* WPF Windows-style Buttons */
+.wpf-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    padding: 0.45rem 0.95rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 80px;
+}
+
+[data-theme="light"] .wpf-btn {
+    background: #f9fafb;
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.wpf-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="light"] .wpf-btn:hover {
+    background: #f3f4f6;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.wpf-btn-accent {
+    background: var(--primary-glow) !important;
+    border-color: rgba(var(--primary-rgb), 0.3) !important;
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+.wpf-btn-accent:hover {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+
+.wpf-btn-danger {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+    color: var(--danger) !important;
+}
+
+.wpf-btn-danger:hover {
+    background: var(--danger) !important;
+    border-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+.wpf-btn-large {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+/* WPF Custom Selects, Textboxes, Checkboxes */
+.wpf-textbox {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    width: 70px;
+    text-align: center;
+}
+
+[data-theme="light"] .wpf-textbox {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.18);
+    color: #0f172a;
+}
+
+.wpf-combo {
+    background: rgba(25, 25, 25, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+[data-theme="light"] .wpf-combo {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #0f172a;
+}
+
+.wpf-checkbox,
+.wpf-radio {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.wpf-checkbox input,
+.wpf-radio input {
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.wpf-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Grid Layout Forms for specific tabs */
+.wpf-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+}
+
+.wpf-layout-grid-adb {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0.85rem;
+    height: 100%;
+}
+
+.wpf-adb-left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wpf-adb-right-panel {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 1rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+[data-theme="light"] .wpf-adb-right-panel {
+    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.005);
+}
+
+.wpf-various-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.25rem;
+}
+
+[data-theme="light"] .wpf-various-title {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Fastboot grids */
+.wpf-fastboot-options {
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+}
+
+[data-theme="light"] .wpf-fastboot-options {
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+.wpf-layout-grid-fastboot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.wpf-layout-grid-fastboot .wpf-groupbox {
+    margin-bottom: 0;
+}
+
+/* Advanced grid */
+.wpf-layout-grid-advanced {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrcpy grid */
+.wpf-layout-grid-scrcpy {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.wpf-layout-grid-scrcpy .wpf-groupbox {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Devices grid */
+.wpf-layout-grid-devices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.wpf-layout-grid-devices .wpf-groupbox {
+    margin-bottom: 0;
+}
+
+.connection-group-devices {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wpf-device-list {
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.wpf-radio {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.4rem 0.25rem;
+    width: 100%;
+}
+
+[data-theme="light"] .wpf-radio {
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+.wpf-radio:last-child {
+    border-bottom: none;
+}
+
+.wpf-device-serial {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+}
+
+.wpf-device-status-lbl {
+    font-size: 0.7rem;
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.05rem 0.35rem;
+    border-radius: 3px;
+    margin-left: auto;
+}
+
+/* --- Floating Scrcpy Visual Screen Mirroring Overlay window --- */
+.wpf-visual-overlay {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    z-index: 100;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    animation: zoomInWPF 0.25s ease-out;
+}
+
+[data-theme="light"] .wpf-visual-overlay {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes zoomInWPF {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.wpf-overlay-header {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.45rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .wpf-overlay-header {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.wpf-overlay-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.wpf-overlay-close-btn:hover {
+    background: #c42b1c;
+    color: #fff;
+}
+
+.wpf-overlay-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Smartphone Mockup Body in overlay */
+.phone-mockup {
+    width: 140px;
+    height: 260px;
+    border: 6px solid #27272a;
+    border-radius: 20px;
+    position: relative;
+    background: #000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+    opacity: 0.35;
+    transition: var(--transition);
+}
+
+.phone-speaker {
+    width: 40px;
+    height: 5px;
+    background: #27272a;
+    border-radius: 10px;
+    position: absolute;
+    top: 6px;
+    left: calc(50% - 20px);
+    z-index: 10;
+}
+
+.phone-content {
+    color: #fff;
+    font-size: 0.65rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.phone-content i {
+    font-size: 2.2rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.phone-status-text {
+    font-weight: 700;
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+}
+
+/* When Scrcpy is Active (State modification) */
+.phone-mockup.active {
+    border-color: var(--success);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+}
+
+.phone-mockup.active .phone-screen {
+    opacity: 1;
+    background: radial-gradient(circle, #10b981 0%, #064e3b 100%);
+}
+
+.phone-mockup.active .phone-content i {
+    color: #fff;
+    animation: phonePulse 1.5s infinite;
+}
+
+.phone-mockup.active .phone-status-text {
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes phonePulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* WPF Terminal Box inside App Frame */
+.sim-terminal-wpf {
+    background: #0d0e12;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+}
+
+[data-theme="light"] .sim-terminal-wpf {
+    background: #111827;
+}
+
+.terminal-wpf-header {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.35rem 1rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #9ca3af;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-blinking-status {
+    color: var(--success);
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.terminal-blinking-status::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: cursor-blink 1.2s infinite;
+}
+
+.sim-terminal {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #34d399;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.terminal-line {
+    word-break: break-all;
+    line-height: 1.4;
+}
+
+.terminal-line .command {
+    color: #60a5fa;
+}
+
+.terminal-line .info {
+    color: #e2e8f0;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 13px;
+    background: #34d399;
+    animation: cursor-blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+/* ==========================================================================
+   Key Statistics Metrics Section
+   ========================================================================== */
+
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.metric-card {
+    padding: 2.25rem 1.5rem;
+    text-align: center;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.metric-number {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Features Modular Showcase Grid
+   ========================================================================== */
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-card {
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feature-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: var(--primary-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(var(--primary-rgb), 0.25);
+    margin-bottom: 0.5rem;
+}
+
+.feature-card:nth-child(2) .feature-icon-wrapper {
+    background: var(--secondary-glow);
+    border-color: rgba(var(--secondary-rgb), 0.25);
+}
+
+.feature-card:nth-child(3) .feature-icon-wrapper {
+    background: var(--accent-glow);
+    border-color: rgba(6, 182, 212, 0.25);
+}
+
+.feature-icon-wrapper i {
+    font-size: 1.35rem;
+    color: var(--primary);
+}
+
+.feature-card:nth-child(2) .feature-icon-wrapper i {
+    color: var(--secondary);
+}
+
+.feature-card:nth-child(3) .feature-icon-wrapper i {
+    color: var(--accent);
+}
+
+.feature-card h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.feature-bullet-list {
+    list-style: none;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.feature-bullet-list li {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.feature-bullet-list li i {
+    color: var(--success);
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   Interactive Connection Guides (Tab Swapper)
+   ========================================================================== */
+
+.guides-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.guide-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.guide-tab-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.guide-tab-btn:hover {
+    color: var(--text-primary);
+    border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+.guide-tab-btn.active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+/* Step Container Display animations */
+.guide-content-panel {
+    display: none;
+}
+
+.guide-content-panel.active {
+    display: block;
+    animation: slideUp 0.5s ease-out;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.step-card {
+    padding: 1.75rem 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.step-details {
+    flex: 1;
+}
+
+.step-details h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.step-details h4 code {
+    font-size: 0.85rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .step-details h4 code {
+    background: rgba(15, 23, 42, 0.08);
+}
+
+.step-details p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Warning & Alerts */
+.step-details .tip-box {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--accent);
+    background: rgba(6, 182, 212, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+}
+
+.tip-box strong {
+    color: var(--accent);
+}
+
+/* ==========================================================================
+   Developer Corner & Clipboard Script Container
+   ========================================================================== */
+
+.dev-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.terminal-mock {
+    background: var(--terminal-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.terminal-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.terminal-tab {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.terminal-body pre {
+    margin: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.terminal-body code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #10b981;
+}
+
+.terminal-body .command-comment {
+    color: #64748b;
+}
+
+.terminal-body .command-input {
+    color: #3b82f6;
+}
+
+.copy-btn {
+    background: var(--primary-glow);
+    border: 1px solid rgba(var(--primary-rgb), 0.3);
+    color: var(--primary);
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: var(--transition);
+}
+
+.copy-btn:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.03);
+}
+
+/* ==========================================================================
+   Chronological Timeline & Releases v2.0
+   ========================================================================== */
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+/* Timeline Vertical Line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--card-border));
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 1rem 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Even/Odd Layout Splits */
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+/* Central Node Circle */
+.timeline-badge {
+    position: absolute;
+    top: 25px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg-color);
+    border: 3px solid var(--primary);
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.timeline-item:nth-child(odd) .timeline-badge {
+    right: -9px;
+}
+
+.timeline-item:nth-child(even) .timeline-badge {
+    left: -9px;
+}
+
+.timeline-item:hover .timeline-badge {
+    background: var(--primary);
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.timeline-item:nth-child(even) .timeline-badge {
+    border-color: var(--secondary);
+}
+
+.timeline-item:nth-child(even):hover .timeline-badge {
+    background: var(--secondary);
+    box-shadow: 0 0 12px var(--secondary-glow);
+}
+
+.timeline-card {
+    padding: 1.75rem;
+}
+
+.timeline-version {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 0.15rem;
+}
+
+.timeline-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+.timeline-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-features {
+    align-items: flex-end;
+}
+
+.timeline-features li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-features li {
+    flex-direction: row-reverse;
+}
+
+.timeline-features li i {
+    font-size: 0.8rem;
+}
+
+.timeline-features .added i {
+    color: var(--success);
+}
+
+.timeline-features .patched i {
+    color: var(--accent);
+}
+
+.timeline-features .fixed i {
+    color: var(--warning);
+}
+
+/* ==========================================================================
+   Premium Collapsible FAQ Accordion Section
+   ========================================================================== */
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    border-color: rgba(var(--primary-rgb), 0.2);
+}
+
+.faq-header {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 1.35rem 1.75rem;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.faq-icon-arrow {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Expand state */
+.faq-item.active .faq-header {
+    background: rgba(var(--primary-rgb), 0.05);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.faq-item.active .faq-icon-arrow {
+    transform: rotate(180deg);
+    color: var(--primary);
+}
+
+.faq-body {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(11, 17, 34, 0.2);
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] .faq-body {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.faq-content {
+    padding: 1.35rem 1.75rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   Footer Call to Action & Copyrights
+   ========================================================================== */
+
+.footer-section {
+    border-top: 1px solid var(--card-border);
+    background: rgba(5, 8, 16, 0.9);
+    padding: 4rem 0 2rem 0;
+    text-align: center;
+}
+
+[data-theme="light"] .footer-section {
+    background: #f8fafc;
+}
+
+.footer-cta {
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+.footer-cta h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-cta p {
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+}
+
+.footer-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--card-border);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==========================================================================
+   Scroll-Reveal CSS States (Triggered by JS IntersectionObserver)
+   ========================================================================== */
+
+.reveal-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-element.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay modifiers */
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+
+/* ==========================================================================
+   Keyframe CSS Animations
+   ========================================================================== */
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+
+    70% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+@keyframes cursor-blink {
+
+    from,
+    to {
+        background-color: transparent
+    }
+
+    50% {
+        background-color: #10b981
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Responsive Viewports Media Queries
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    html {
+        font-size: 15px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+        padding-top: 6rem;
+    }
+
+    .hero-ctas {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        max-width: 550px;
+        margin: 0 auto;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 4rem 0;
+    }
+
+    /* Navigation responsive mobile menu */
+    .nav-links {
+        display: none;
+        /* Can be toggled if complex, simplified for landing single-page scroll */
+    }
+
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
+    .timeline::before {
+        left: 2.5rem;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 4.5rem;
+        padding-right: 0;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-badge,
+    .timeline-item:nth-child(even) .timeline-badge {
+        left: 2rem;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-features {
+        align-items: flex-start;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-features li {
+        flex-direction: row;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .app-simulator {
+        height: 440px;
+    }
+
+    .app-sidebar {
+        width: 120px;
+    }
+
+    .sim-nav-btn {
+        padding: 0.5rem 0.65rem;
+        font-size: 0.75rem;
+    }
+
+    .metrics-row {
+        grid-template-columns: 1fr;
+    }
+}
